@@ -5,16 +5,19 @@
  */
 package GUI;
 
+import Main.Mainframe;
+
 /**
  *
  * @author zepingluo
  */
 public class FRQPanel extends javax.swing.JPanel {
 
+    Mainframe frame;
     /**
      * Creates new form FRQPanel
      */
-    public FRQPanel() {
+    public FRQPanel(Mainframe frame) {
         initComponents();
     }
 

@@ -5,10 +5,18 @@
  */
 package Main;
 
+import DataStructure.Questions;
+import GUI.FRQPanel;
+import GUI.MCPanel;
+import GUI.openPanel;
+import java.awt.BorderLayout;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -19,7 +27,19 @@ public class Mainframe extends javax.swing.JFrame {
     public String filePath;
     
     
-    public String test;
+     public ArrayList<Questions> questionList;
+     public int numQuestion;
+     
+     
+     public String testName;
+     public String testWriter;
+     
+    public static final int EASY = 0;
+    public static final int MEDIUM = 1;
+    public static final int HARD =2;
+    public static final int UNKNOWN=-1;
+    public static final int MULTIPLECHOICE=0;
+    public static final int FREERESPONSE = 1;
     /**
      * Creates new form Mainframe
      */
@@ -27,20 +47,53 @@ public class Mainframe extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void setQuestionPanel(JPanel panel)
+       {
+          QuestionPanel.setLayout(new BorderLayout());
+            QuestionPanel.updateUI();
+            QuestionPanel.removeAll();
+         
+        QuestionPanel.add(panel, BorderLayout.CENTER);
+        }
+        
+    public void loadQuestion()
+    {
+        
+        
+            int type = questionList.get(numQuestion).getType();
+            if (type == MULTIPLECHOICE) {
+                setQuestionPanel(new MCPanel(this));
+            } else {
+                setQuestionPanel(new FRQPanel(this));
+            }
+        
+        
+    }
+    
+    public void addQuestion()
+    {
+        
+    }
+    
+    public void save()
+    {
+        
+    }
+    /*
     public void save() {
         
         // Output the numbers to a text file
-       // try {
+        try {
               
-          //  PrintWriter writer = new PrintWriter(new File(filePath));
+           PrintWriter writer = new PrintWriter(new File(filePath));
 
-            /* Write the number of games to the file
-            writer.println(numGames);
+            // Write the number of games to the file
+            writer.println();
 
             // Loop through players and write their information to the file
             // Names on the first line, goals on the second line
-            for (int n = 0; n < players.size(); n++) {
-                writer.println(players.get(n).getFirstName() + ","
+            for (int n = 0; n < questionList.size(); n++) {
+                writer.println(question.get(n).getFirstName() + ","
                         + players.get(n).getLastName() + ","
                         + players.get(n).getNumber() + ","
                         + players.get(n).getPosition());
@@ -55,10 +108,10 @@ public class Mainframe extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error trying to load file: " + ex,
                     "Load Error",
                     JOptionPane.ERROR_MESSAGE);
-        }*/
+        }
     }
     
-    
+    */
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,6 +127,10 @@ public class Mainframe extends javax.swing.JFrame {
         QuestionPanel = new javax.swing.JPanel();
         saveButton = new javax.swing.JButton();
         addButton = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        chooseFile = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -85,17 +142,22 @@ public class Mainframe extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        QuestionList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                QuestionListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(QuestionList);
 
         javax.swing.GroupLayout QuestionPanelLayout = new javax.swing.GroupLayout(QuestionPanel);
         QuestionPanel.setLayout(QuestionPanelLayout);
         QuestionPanelLayout.setHorizontalGroup(
             QuestionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
+            .addGap(0, 609, Short.MAX_VALUE)
         );
         QuestionPanelLayout.setVerticalGroup(
             QuestionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 421, Short.MAX_VALUE)
         );
 
         saveButton.setText("Save Question");
@@ -104,6 +166,19 @@ public class Mainframe extends javax.swing.JFrame {
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addButtonActionPerformed(evt);
+            }
+        });
+
+        jTextField1.setText("jTextField1");
+
+        jLabel1.setText("difficulty");
+
+        jLabel2.setText("Image File");
+
+        chooseFile.setText("chooseFile");
+        chooseFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chooseFileActionPerformed(evt);
             }
         });
 
@@ -119,30 +194,53 @@ public class Mainframe extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
-                .addComponent(QuestionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(QuestionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(chooseFile)))))
+                .addGap(65, 65, 65))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(QuestionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chooseFile))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addComponent(QuestionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))))
         );
 
         pack();
@@ -150,7 +248,39 @@ public class Mainframe extends javax.swing.JFrame {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
+        String[] options={"Multiple choice","Free Response"};
+          int n = JOptionPane.showOptionDialog(QuestionPanel, testName, testName, WIDTH, HEIGHT, null, options, NORMAL);
+
+                switch (n) {
+
+                    case 0:setQuestionPanel(new MCPanel(this));
+                        
+                        
+                    case 1:setQuestionPanel(new FRQPanel(this));
+                        
+                        
+                        
+                        
+                }
     }//GEN-LAST:event_addButtonActionPerformed
+
+    private void QuestionListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuestionListMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() > 1) {
+            int questionIndex = QuestionList.getSelectedIndex();
+            numQuestion=questionIndex;
+            loadQuestion();
+        }
+    }//GEN-LAST:event_QuestionListMouseClicked
+
+    private void chooseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseFileActionPerformed
+        // TODO add your handling code here:
+       JDialog dialog = new JDialog(this, true);
+                            dialog.add(new openPanel(this));
+                            dialog.pack();
+                            dialog.setVisible(true);
+                            
+    }//GEN-LAST:event_chooseFileActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,10 +321,14 @@ public class Mainframe extends javax.swing.JFrame {
     private javax.swing.JList<String> QuestionList;
     private javax.swing.JPanel QuestionPanel;
     private javax.swing.JButton addButton;
+    private javax.swing.JButton chooseFile;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 }
