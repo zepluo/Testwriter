@@ -27,22 +27,23 @@ public class Questions {
        this.stem = stem;
        this.choices = choices;
        this.correctAnswer = correctAnswer;
-       this.type = type;
-       userAnswer = "";
-       this.imageFile=imageFile;
+        this.type = type;
+        userAnswer = "";
+        this.imageFile = imageFile;
     }
-    public Questions(int type, String stem, String correctAnswer,int difficulty,String imageFile)
-    {
-        this.type =type;
+
+    public Questions(int type, String stem, String correctAnswer, int difficulty, String imageFile) {
+        this.type = type;
         this.difficulty = difficulty;
-       this.stem = stem;
+        this.stem = stem;
         this.correctAnswer = correctAnswer;
         userAnswer = "";
-        this.choices=null;
-        
+        this.choices = null;
+        this.imageFile=imageFile;
+
     }
-    public String getUserAnswer()
-    {
+
+    public String getUserAnswer() {
         return userAnswer;
     }
     public String getCorrectAnswer()
