@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 public class Mainframe extends javax.swing.JFrame {
 
     public String filePath;
+    public int test;
     /**
      * Creates new form Mainframe
      */
