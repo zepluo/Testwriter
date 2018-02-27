@@ -17,7 +17,9 @@ import javax.swing.JOptionPane;
 public class Mainframe extends javax.swing.JFrame {
 
     public String filePath;
-    public int test;
+    
+    
+    public String test;
     /**
      * Creates new form Mainframe
      */
@@ -26,6 +28,7 @@ public class Mainframe extends javax.swing.JFrame {
     }
 
     public void save() {
+        
         // Output the numbers to a text file
        // try {
               
