@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -46,6 +47,7 @@ public class Mainframe extends javax.swing.JFrame {
      */
     public Mainframe() {
         initComponents();
+        questionList = new ArrayList<>();
     }
 
     public void setQuestionPanel(JPanel panel)
@@ -83,14 +85,14 @@ public class Mainframe extends javax.swing.JFrame {
                         
                     case 1:setQuestionPanel(new FRQPanel(this));
                       
-                }
-                
+                }                
         questionList.add(new Questions());
+        drawList();
     }
     
     public void drawList()
     {
-        DefaultListModel dlm=new DefaultListModel();
+        DefaultListModel dlm=new DefaultListModel(); 
         for(int i=0;i<questionList.size();i++)
         {
             dlm.addElement("question "+i);
@@ -100,6 +102,8 @@ public class Mainframe extends javax.swing.JFrame {
     
     public void save()
     {
+        //PrintWriter writer = new PrintWriter(new File(filePath));
+        
         
     }
     /*
@@ -148,7 +152,6 @@ public class Mainframe extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         QuestionList = new javax.swing.JList<>();
         QuestionPanel = new javax.swing.JPanel();
-        saveButton = new javax.swing.JButton();
         addButton = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -160,11 +163,6 @@ public class Mainframe extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        QuestionList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         QuestionList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 QuestionListMouseClicked(evt);
@@ -182,13 +180,6 @@ public class Mainframe extends javax.swing.JFrame {
             QuestionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 421, Short.MAX_VALUE)
         );
-
-        saveButton.setText("Save Question");
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
-            }
-        });
 
         addButton.setText("Add New Question");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -224,7 +215,6 @@ public class Mainframe extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -257,9 +247,7 @@ public class Mainframe extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(61, 61, 61)
                         .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -297,11 +285,6 @@ public class Mainframe extends javax.swing.JFrame {
                             dialog.setVisible(true);
                             
     }//GEN-LAST:event_chooseFileActionPerformed
-
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_saveButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -350,6 +333,5 @@ public class Mainframe extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 }
