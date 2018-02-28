@@ -18,8 +18,11 @@ public class MCPanel extends javax.swing.JPanel {
      * Creates new form MCPanel
      */
     public MCPanel(Mainframe frame) {
+        this.frame = frame;
         initComponents();
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
