@@ -8,12 +8,13 @@ package Main;
 import DataStructure.Questions;
 import GUI.FRQPanel;
 import GUI.MCPanel;
-import GUI.openPanel;
+import GUI.openPicturePanel;
 import java.awt.BorderLayout;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -60,7 +61,7 @@ public class Mainframe extends javax.swing.JFrame {
     {
         
         
-            int type = questionList.get(numQuestion).getType();
+        int type = questionList.get(numQuestion).getType();
             if (type == MULTIPLECHOICE) {
                 setQuestionPanel(new MCPanel(this));
             } else {
@@ -72,7 +73,29 @@ public class Mainframe extends javax.swing.JFrame {
     
     public void addQuestion()
     {
-        
+        String[] options={"Multiple choice","Free Response"};
+          int n = JOptionPane.showOptionDialog(QuestionPanel, testName, testName, WIDTH, HEIGHT, null, options, NORMAL);
+
+                switch (n) {
+
+                    case 0:setQuestionPanel(new MCPanel(this));
+                        
+                        
+                    case 1:setQuestionPanel(new FRQPanel(this));
+                      
+                }
+                
+        questionList.add(new Questions());
+    }
+    
+    public void drawList()
+    {
+        DefaultListModel dlm=new DefaultListModel();
+        for(int i=0;i<questionList.size();i++)
+        {
+            dlm.addElement("question "+i);
+        }
+        QuestionList.setModel(dlm);
     }
     
     public void save()
@@ -161,6 +184,11 @@ public class Mainframe extends javax.swing.JFrame {
         );
 
         saveButton.setText("Save Question");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         addButton.setText("Add New Question");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -248,20 +276,8 @@ public class Mainframe extends javax.swing.JFrame {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
-        String[] options={"Multiple choice","Free Response"};
-          int n = JOptionPane.showOptionDialog(QuestionPanel, testName, testName, WIDTH, HEIGHT, null, options, NORMAL);
-
-                switch (n) {
-
-                    case 0:setQuestionPanel(new MCPanel(this));
-                        
-                        
-                    case 1:setQuestionPanel(new FRQPanel(this));
-                        
-                        
-                        
-                        
-                }
+        addQuestion();
+                
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void QuestionListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuestionListMouseClicked
@@ -276,11 +292,16 @@ public class Mainframe extends javax.swing.JFrame {
     private void chooseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseFileActionPerformed
         // TODO add your handling code here:
        JDialog dialog = new JDialog(this, true);
-                            dialog.add(new openPanel(this));
+                            dialog.add(new openPicturePanel(this));
                             dialog.pack();
                             dialog.setVisible(true);
                             
     }//GEN-LAST:event_chooseFileActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_saveButtonActionPerformed
 
     /**
      * @param args the command line arguments

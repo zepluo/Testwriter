@@ -12,13 +12,13 @@ import javax.swing.JDialog;
  *
  * @author zepingluo
  */
-public class openPanel extends javax.swing.JPanel {
+public class openPicturePanel extends javax.swing.JPanel {
 
     Mainframe frame;
     /**
      * Creates new form openPanel
      */
-    public openPanel(Mainframe frame) {
+    public openPicturePanel(Mainframe frame) {
         initComponents();
     }
 
@@ -69,6 +69,7 @@ public class openPanel extends javax.swing.JPanel {
         }
         else
         {
+            //record into question
                 frame.questionList.get(frame.numQuestion).setImageFile(fileChooser.getSelectedFile().getAbsolutePath());
                 
                 

@@ -20,7 +20,11 @@ public class Questions {
     public String imageFile;
     public static final int MULTIPLECHOICE=0;
     public static final int FREERESPONSE = 1;
-   
+    
+    public Questions()
+    {
+        
+    }
     public Questions(int type, int difficulty, String stem, String[] choices, String correctAnswer,String imageFile)
     {
        this.difficulty = difficulty;
