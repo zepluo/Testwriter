@@ -7,7 +7,7 @@ package Main;
 
 import DataStructure.Questions;
 import GUI.FRQPanel;
-//import GUI.MCPanel;
+import GUI.MCPanel;
 import GUI.openPicturePanel;
 import java.awt.BorderLayout;
 import java.io.File;
@@ -80,7 +80,7 @@ public class Mainframe extends javax.swing.JFrame {
 
                 switch (n) {
 
-                  //  case 0:setQuestionPanel(new MCPanel(this));
+                    case 0:setQuestionPanel(new MCPanel(this));
                         
                         
                     case 1:setQuestionPanel(new FRQPanel(this));
