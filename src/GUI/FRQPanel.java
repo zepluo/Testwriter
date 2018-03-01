@@ -7,19 +7,35 @@ package GUI;
 
 import Main.Mainframe;
 
+
+
 /**
  *
  * @author zepingluo
  */
 public class FRQPanel extends javax.swing.JPanel {
-
+    private String stem;
+    private String userAnswer;
     Mainframe frame;
     /**
      * Creates new form FRQPanel
      */
     public FRQPanel(Mainframe frame) {
         initComponents();
+        this.frame = frame;
+        
     }
+    public FRQQustion(String stem, String userAnswer){
+        
+    }
+    public void setStem(String stem){
+        this.stem = stem;
+        
+    }
+    public void setUserAnswer(String answer){
+        this.userAnswer = answer;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,7 +96,7 @@ public class FRQPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        // TODO add your handling code here:
+        frame.questionList.get(frame.numQuestion).get(// TODO add your handling code here:
         
     }//GEN-LAST:event_saveButtonActionPerformed
 
