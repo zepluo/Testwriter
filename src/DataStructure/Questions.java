@@ -76,7 +76,7 @@ public class Questions {
     {
         return imageFile;
     }
-    public String[] getchoices()
+    public String[] getChoices()
     {
         return choices;
     }

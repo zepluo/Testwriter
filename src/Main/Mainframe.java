@@ -14,6 +14,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
@@ -29,7 +31,7 @@ public class Mainframe extends javax.swing.JFrame {
     public String filePath;
 
     public ArrayList<Questions> questionList;
-    public int numQuestion;
+    public int numQuestion=-1;
 
     public String testName;
     public String testWriter;
@@ -47,6 +49,7 @@ public class Mainframe extends javax.swing.JFrame {
     public Mainframe() {
         initComponents();
         questionList = new ArrayList<>();
+        removeButton.setEnabled(false);
     }
 
     public void setQuestionPanel(JPanel panel) {
@@ -66,14 +69,14 @@ public class Mainframe extends javax.swing.JFrame {
             setQuestionPanel(new FRQPanel(this));
         }
 
-        questionNumberLabel.setText("quesiton Index: " + numQuestion);
 
     }
 
     public void addQuestion() {
+        numQuestion++;
         String[] options = {"Multiple choice", "Free Response"};
 
-        int choice = JOptionPane.showOptionDialog(QuestionPanel, //Component parentComponent
+        int choice = JOptionPane.showOptionDialog(this, //Component parentComponent
                 "MC or FRQ?", //Object message,
                 "Choose an option", //String title
                 JOptionPane.YES_NO_OPTION, //int optionType
@@ -96,56 +99,56 @@ public class Mainframe extends javax.swing.JFrame {
         }
       
         loadQuestion();
-        numQuestion++;
+        //numQuestion++;
         drawList();
     }
 
     public void drawList() {
         DefaultListModel dlm = new DefaultListModel();
         for (int i = 0; i < questionList.size(); i++) {
-            dlm.addElement("question " + i);
+            dlm.addElement("question " + (i+1));
         }
         QuestionList.setModel(dlm);
     }
 
     public void save() {
-        //PrintWriter writer = new PrintWriter(new File(filePath));
-
-    }
-
-    /*
-    public void save() {
-        
-        // Output the numbers to a text file
         try {
-              
-           PrintWriter writer = new PrintWriter(new File(filePath));
-
-            // Write the number of games to the file
-            writer.println();
-
-            // Loop through players and write their information to the file
-            // Names on the first line, goals on the second line
-            for (int n = 0; n < questionList.size(); n++) {
-                writer.println(question.get(n).getFirstName() + ","
-                        + players.get(n).getLastName() + ","
-                        + players.get(n).getNumber() + ","
-                        + players.get(n).getPosition());
-                for (int g = 0; g < SoccerPlayer.MAX_GAMES; g++) {
-                    writer.print(players.get(n).getGoals(g) + ",");
+            PrintWriter writer = new PrintWriter(new File(filePath));
+            
+            writer.println(testName);
+            writer.println(testWriter);
+            for(int n=0;n< questionList.size(); n++)
+            {
+                Questions cur = questionList.get(n);
+                writer.println(cur.getType());
+                if(cur.getType()==MULTIPLECHOICE)
+                {
+                    writer.println(cur.getStem());
+                    for(int i=0;i<4;i++)
+                    {
+                        writer.println(cur.getChoices()[i]);
+                    }
+                    writer.println(cur.getCorrectAnswer());
+                    writer.println(""+cur.getDifficulty());
+                    writer.println(cur.getImageFile());
                 }
-                writer.println();
+                if(cur.getType()==FREERESPONSE)
+                {
+                    writer.println(cur.getCorrectAnswer());
+                    writer.println(""+cur.getDifficulty());
+                    writer.println(cur.getImageFile());
+                }
+                
             }
-
             writer.close();
+                    
         } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(this, "Error trying to load file: " + ex,
-                    "Load Error",
-                    JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(Mainframe.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
-    
-     */
+
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -160,14 +163,23 @@ public class Mainframe extends javax.swing.JFrame {
         QuestionList = new javax.swing.JList<>();
         QuestionPanel = new javax.swing.JPanel();
         addButton = new javax.swing.JButton();
-        questionNumberLabel = new javax.swing.JLabel();
         removeButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+        });
 
+        QuestionList.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                QuestionListMouseDragged(evt);
+            }
+        });
         QuestionList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 QuestionListMouseClicked(evt);
@@ -192,8 +204,6 @@ public class Mainframe extends javax.swing.JFrame {
                 addButtonActionPerformed(evt);
             }
         });
-
-        questionNumberLabel.setText("Question number");
 
         removeButton.setText("Remove Question");
         removeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -221,21 +231,14 @@ public class Mainframe extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(addButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(questionNumberLabel)
-                        .addGap(237, 237, 237))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(QuestionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addComponent(QuestionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(questionNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -259,6 +262,7 @@ public class Mainframe extends javax.swing.JFrame {
     private void QuestionListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuestionListMouseClicked
         // TODO add your handling code here:
         if (evt.getClickCount() > 1) {
+            removeButton.setEnabled(true);
             int questionIndex = QuestionList.getSelectedIndex();
             numQuestion = questionIndex;
             loadQuestion();
@@ -269,10 +273,30 @@ public class Mainframe extends javax.swing.JFrame {
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
         // TODO add your handling code here:
-        System.out.println(""+QuestionList.size());
-        QuestionList.remove(numQuestion);
-        drawList();
+        removeButton.setEnabled(false);
+        questionList.remove(numQuestion);
+        if(numQuestion>0)
+        {
+            numQuestion--;
+            drawList();
+            loadQuestion();
+        }
+        else
+        {
+            QuestionPanel.updateUI();
+            QuestionPanel.removeAll();
+            drawList();
+        }
     }//GEN-LAST:event_removeButtonActionPerformed
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_formMouseDragged
+
+    private void QuestionListMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuestionListMouseDragged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_QuestionListMouseDragged
 
     /**
      * @param args the command line arguments
@@ -317,7 +341,6 @@ public class Mainframe extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel questionNumberLabel;
     private javax.swing.JButton removeButton;
     // End of variables declaration//GEN-END:variables
 }

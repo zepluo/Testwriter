@@ -5,7 +5,9 @@
  */
 package GUI;
 
+import DataStructure.Questions;
 import Main.Mainframe;
+import java.util.ArrayList;
 import javax.swing.JDialog;
 
 /**
@@ -15,11 +17,17 @@ import javax.swing.JDialog;
 public class openPicturePanel extends javax.swing.JPanel {
 
     Mainframe frame;
+    int numQuestion;
+    ArrayList<Questions> questionList;
+   
     /**
      * Creates new form openPanel
      */
     public openPicturePanel(Mainframe frame) {
         initComponents();
+        numQuestion= frame.numQuestion;
+        questionList=frame.questionList;
+       
     }
 
     /**
@@ -62,16 +70,20 @@ public class openPicturePanel extends javax.swing.JPanel {
          if (evt.getActionCommand().equals("CancelSelection"))
         {
             ((JDialog) this.getTopLevelAncestor()).dispose();
-            
         }
         else if (fileChooser.getSelectedFile().getAbsolutePath() == null)
         {
+            
         }
         else
         {
-            //record into question
-                frame.questionList.get(frame.numQuestion).setImageFile(fileChooser.getSelectedFile().getAbsolutePath());
-                
+               //record into question
+            String filepath = fileChooser.getSelectedFile().getAbsolutePath();
+            System.out.println(filepath);
+            System.out.println(""+numQuestion);
+            
+            questionList.get(numQuestion).setImageFile(filepath);
+
                 
         }
                 ((JDialog) this.getTopLevelAncestor()).dispose();
