@@ -25,6 +25,10 @@ public class Questions {
     {
         
     }
+    public Questions(int type)
+    {
+        this.type =type;
+    }
     public Questions(int type, int difficulty, String stem, String[] choices, String correctAnswer,String imageFile)
     {
        this.difficulty = difficulty;
