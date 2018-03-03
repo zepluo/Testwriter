@@ -27,7 +27,62 @@ public class MCPanel extends javax.swing.JPanel {
     
     public void load()
     {
+        A.setSelected(true);
+        Easy.setSelected(true);
         questionNumLabel.setText("Question # "+(frame.numQuestion+1));
+          
+        Questions cur = frame.questionList.get(frame.numQuestion);
+        choiceA.setText(cur.getChoices()[0]);
+        choiceB.setText(cur.getChoices()[1]);
+        choiceC.setText(cur.getChoices()[2]);
+        choiceD.setText(cur.getChoices()[3]);
+        stemArea.setText(cur.getStem());
+        fileLabel.setText(cur.getImageFile());
+        String answer =cur.getCorrectAnswer();
+        
+            if(answer.equalsIgnoreCase("A"))
+            {
+                A.setSelected(true);
+                
+            }
+            
+            if(answer.equalsIgnoreCase("B"))
+            {
+                B.setSelected(true);
+                
+            }
+            
+            if(answer.equalsIgnoreCase("C"))
+            {
+                C.setSelected(true);
+                
+            }
+            
+            if(answer.equalsIgnoreCase("D"))
+            {
+                D.setSelected(true);
+                
+            }
+            
+            
+        
+        
+        if(cur.getDifficulty()==0)
+        {
+            Easy.setSelected(true);
+            
+        }
+        if(cur.getDifficulty()==1)
+        {
+            Medium.setSelected(true);
+        }
+        if(cur.getDifficulty()==2)
+        {
+            Hard.setSelected(true);
+        }
+        
+      
+        
         
     }
     
@@ -42,6 +97,7 @@ public class MCPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         choiceA = new javax.swing.JTextField();
         choiceB = new javax.swing.JTextField();
         choiceC = new javax.swing.JTextField();
@@ -53,7 +109,6 @@ public class MCPanel extends javax.swing.JPanel {
         Blabel = new javax.swing.JLabel();
         Clabel = new javax.swing.JLabel();
         Dlabel = new javax.swing.JLabel();
-        difficultyText = new javax.swing.JTextField();
         difficultyLabel = new javax.swing.JLabel();
         imageFileLabel = new javax.swing.JLabel();
         chooseFile = new javax.swing.JButton();
@@ -64,6 +119,9 @@ public class MCPanel extends javax.swing.JPanel {
         C = new javax.swing.JRadioButton();
         D = new javax.swing.JRadioButton();
         fileLabel = new javax.swing.JLabel();
+        Easy = new javax.swing.JRadioButton();
+        Medium = new javax.swing.JRadioButton();
+        Hard = new javax.swing.JRadioButton();
 
         choiceB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,8 +142,6 @@ public class MCPanel extends javax.swing.JPanel {
         Clabel.setText("Enter Option C");
 
         Dlabel.setText("Enter Option D");
-
-        difficultyText.setText("jTextField1");
 
         difficultyLabel.setText("difficulty");
 
@@ -129,6 +185,20 @@ public class MCPanel extends javax.swing.JPanel {
 
         fileLabel.setText("jLabel2");
 
+        buttonGroup1.add(Easy);
+        Easy.setText("Easy");
+
+        buttonGroup1.add(Medium);
+        Medium.setText("Medium");
+
+        buttonGroup1.add(Hard);
+        Hard.setText("Hard");
+        Hard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HardActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -146,9 +216,13 @@ public class MCPanel extends javax.swing.JPanel {
                                 .addComponent(fileLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(difficultyLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(difficultyText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Easy)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Medium)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Hard)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 277, Short.MAX_VALUE)
                                 .addComponent(saveButton))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,13 +254,13 @@ public class MCPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(questionNumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addGap(63, 63, 63))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(questionNumLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                .addComponent(questionNumLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -215,11 +289,13 @@ public class MCPanel extends javax.swing.JPanel {
                     .addComponent(choiceD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Dlabel)
                     .addComponent(D))
-                .addGap(41, 41, 41)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(difficultyLabel)
-                    .addComponent(difficultyText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveButton))
+                    .addComponent(saveButton)
+                    .addComponent(Easy)
+                    .addComponent(Medium)
+                    .addComponent(Hard))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chooseFile)
@@ -245,7 +321,34 @@ public class MCPanel extends javax.swing.JPanel {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
+        A.setActionCommand("A");
+        B.setActionCommand("B");
+        C.setActionCommand("C");
+        D.setActionCommand("D");
+        String correctAnswer=buttonGroup2.getSelection().getActionCommand();
         
+        
+        String[] choices = {choiceA.getText(),choiceB.getText(),choiceC.getText(),choiceD.getText()};
+        String stem=stemArea.getText();
+        Easy.setActionCommand("0");
+        Medium.setActionCommand("1");
+        Hard.setActionCommand("2");
+        String dif = buttonGroup1.getSelection().getActionCommand();
+        int difficulty;
+        if(dif.equals("1"))
+        {
+            difficulty=1;
+        }
+        else if(dif.equals("2"))
+        {
+            difficulty=2;
+        }
+        else
+        {
+            difficulty=0;
+        }
+        
+        frame.questionList.get(frame.numQuestion).setQuestionInfo(stem, choices, correctAnswer, difficulty);
         
         
     }//GEN-LAST:event_saveButtonActionPerformed
@@ -258,6 +361,10 @@ public class MCPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_DActionPerformed
 
+    private void HardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HardActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HardActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton A;
@@ -268,6 +375,10 @@ public class MCPanel extends javax.swing.JPanel {
     private javax.swing.JLabel Clabel;
     private javax.swing.JRadioButton D;
     private javax.swing.JLabel Dlabel;
+    private javax.swing.JRadioButton Easy;
+    private javax.swing.JRadioButton Hard;
+    private javax.swing.JRadioButton Medium;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JTextField choiceA;
     private javax.swing.JTextField choiceB;
@@ -275,7 +386,6 @@ public class MCPanel extends javax.swing.JPanel {
     private javax.swing.JTextField choiceD;
     private javax.swing.JButton chooseFile;
     private javax.swing.JLabel difficultyLabel;
-    private javax.swing.JTextField difficultyText;
     private javax.swing.JLabel fileLabel;
     private javax.swing.JLabel imageFileLabel;
     private javax.swing.JLabel jLabel1;

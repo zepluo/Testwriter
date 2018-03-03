@@ -11,13 +11,13 @@ package DataStructure;
  */
 public class Questions {
     
-    private int difficulty;
-    private String stem;
-    private String[] choices;
-    private String correctAnswer;
-    private String userAnswer;
+    private int difficulty=-1;
+    private String stem="";
+    private String[] choices={"","","",""};
+    private String correctAnswer="";
+    private String userAnswer="";
     private int type;
-    public String imageFile;
+    public String imageFile="";
     public static final int MULTIPLECHOICE=0;
     public static final int FREERESPONSE = 1;
     
@@ -89,6 +89,14 @@ public class Questions {
     public void setImageFile(String file)
     {
         imageFile=file;
+    }
+    public void setQuestionInfo(String stem,String[] choices, String correctAnswer,int difficulty)
+    {
+        this.stem=stem;
+        this.choices=choices;
+        this.correctAnswer=correctAnswer;
+        this.difficulty=difficulty;
+       
     }
     
 }

@@ -6,8 +6,12 @@
 package Main;
 
 import DataStructure.Questions;
+import DataStructure.test;
 import GUI.FRQPanel;
 import GUI.MCPanel;
+import GUI.SaveTestPanel;
+import GUI.addTestPanel;
+import GUI.openTestPanel;
 import GUI.openPicturePanel;
 import java.awt.BorderLayout;
 import java.io.File;
@@ -28,13 +32,14 @@ import javax.swing.JPanel;
  */
 public class Mainframe extends javax.swing.JFrame {
 
+    
+
+    public ArrayList<test> testList;
+    public test currentTest;
+    //for currentTest
     public String filePath;
-
     public ArrayList<Questions> questionList;
-    public int numQuestion=-1;
-
-    public String testName;
-    public String testWriter;
+    public int numQuestion;
 
     public static final int EASY = 0;
     public static final int MEDIUM = 1;
@@ -48,10 +53,30 @@ public class Mainframe extends javax.swing.JFrame {
      */
     public Mainframe() {
         initComponents();
-        questionList = new ArrayList<>();
+        testList = new ArrayList<>();
         removeButton.setEnabled(false);
+        setQuestionPanel(new openTestPanel(this));
+        
     }
 
+    public void loadTest(test test)
+    {
+        currentTest= test;
+        questionList=currentTest.getTestQuestionList();
+        numQuestion=-1;
+        
+        QuestionPanel.setLayout(new BorderLayout());
+        QuestionPanel.updateUI();
+        QuestionPanel.removeAll();
+        testNameField.setText(currentTest.getTestName());
+        
+          drawList();
+         
+        
+        
+        //filePath?
+        
+    }
     public void setQuestionPanel(JPanel panel) {
         QuestionPanel.setLayout(new BorderLayout());
         QuestionPanel.updateUI();
@@ -86,14 +111,16 @@ public class Mainframe extends javax.swing.JFrame {
                 "Multiple choice");//Object initialValue 
         if (choice == 0) {
             //Metric was chosen
-            setQuestionPanel(new MCPanel(this));
+            
             questionList.add(new Questions(MULTIPLECHOICE));
+            setQuestionPanel(new MCPanel(this));
             System.out.println(questionList.size());
 
         } else {
             //Imperial was chosen
-            setQuestionPanel(new FRQPanel(this));
             questionList.add(new Questions(FREERESPONSE));
+            setQuestionPanel(new FRQPanel(this));
+            
             System.out.println(questionList.size());
 
         }
@@ -102,7 +129,7 @@ public class Mainframe extends javax.swing.JFrame {
         //numQuestion++;
         drawList();
     }
-
+    
     public void drawList() {
         DefaultListModel dlm = new DefaultListModel();
         for (int i = 0; i < questionList.size(); i++) {
@@ -115,8 +142,8 @@ public class Mainframe extends javax.swing.JFrame {
         try {
             PrintWriter writer = new PrintWriter(new File(filePath));
             
-            writer.println(testName);
-            writer.println(testWriter);
+            writer.println(currentTest.getTestName());
+            writer.println(currentTest.getTestWriter());
             for(int n=0;n< questionList.size(); n++)
             {
                 Questions cur = questionList.get(n);
@@ -164,6 +191,9 @@ public class Mainframe extends javax.swing.JFrame {
         QuestionPanel = new javax.swing.JPanel();
         addButton = new javax.swing.JButton();
         removeButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        testNameField = new javax.swing.JTextField();
+        save_and_new_test_Button = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -212,6 +242,17 @@ public class Mainframe extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Test Name:");
+
+        testNameField.setText("jTextField1");
+
+        save_and_new_test_Button.setText("Save the test and start new one");
+        save_and_new_test_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                save_and_new_test_ButtonActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -234,11 +275,24 @@ public class Mainframe extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addComponent(QuestionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(114, 114, 114)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(testNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(save_and_new_test_Button)
+                .addGap(145, 145, 145))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(testNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(save_and_new_test_Button))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -247,7 +301,7 @@ public class Mainframe extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(QuestionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -298,6 +352,28 @@ public class Mainframe extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_QuestionListMouseDragged
 
+    public void clearQuestionList()
+    {
+        DefaultListModel dlm = new DefaultListModel();
+        for (int i = 0; i < 0; i++) {
+            dlm.addElement("");
+        }
+        QuestionList.setModel(dlm);
+    }
+    private void save_and_new_test_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_and_new_test_ButtonActionPerformed
+        // TODO add your handling code here:
+        JDialog dialog = new JDialog(this, true);
+        dialog.add(new SaveTestPanel(this));
+        dialog.pack();
+        dialog.setVisible(true);
+        
+        
+        testNameField.setText("");
+        setQuestionPanel(new openTestPanel(this));
+        clearQuestionList();
+        
+    }//GEN-LAST:event_save_and_new_test_ButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -337,10 +413,13 @@ public class Mainframe extends javax.swing.JFrame {
     private javax.swing.JList<String> QuestionList;
     private javax.swing.JPanel QuestionPanel;
     private javax.swing.JButton addButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton removeButton;
+    private javax.swing.JButton save_and_new_test_Button;
+    private javax.swing.JTextField testNameField;
     // End of variables declaration//GEN-END:variables
 }

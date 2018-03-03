@@ -4,6 +4,8 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="buttonGroup2">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    </Component>
   </NonVisualComponents>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -34,9 +36,13 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="difficultyLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="difficultyText" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="Easy" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="Medium" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="Hard" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="277" max="32767" attributes="0"/>
                               <Component id="saveButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -82,7 +88,7 @@
                       <Component id="questionNumLabel" min="-2" pref="146" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="124" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -90,7 +96,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="questionNumLabel" pref="54" max="32767" attributes="0"/>
+              <Component id="questionNumLabel" pref="56" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -126,11 +132,13 @@
                   <Component id="Dlabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="D" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="difficultyLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="difficultyText" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Easy" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Medium" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Hard" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -193,11 +201,6 @@
     <Component class="javax.swing.JLabel" name="Dlabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Enter Option D"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="difficultyText">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="difficultyLabel">
@@ -270,6 +273,33 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel2"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="Easy">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Easy"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="Medium">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Medium"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="Hard">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Hard"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HardActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
