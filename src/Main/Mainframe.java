@@ -38,7 +38,10 @@ public class Mainframe extends javax.swing.JFrame {
     public test currentTest;
     //for currentTest
     public String filePath;
+    //this is a list
+    
     public ArrayList<Questions> questionList;
+    //this is for the correct display of question in the order
     public int numQuestion;
 
     public static final int EASY = 0;
@@ -246,7 +249,7 @@ public class Mainframe extends javax.swing.JFrame {
 
         testNameField.setText("jTextField1");
 
-        save_and_new_test_Button.setText("Save the test and start new one");
+        save_and_new_test_Button.setText("Save & Back to Menu");
         save_and_new_test_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 save_and_new_test_ButtonActionPerformed(evt);

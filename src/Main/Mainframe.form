@@ -159,7 +159,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="save_and_new_test_Button">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Save the test and start new one"/>
+        <Property name="text" type="java.lang.String" value="Save &amp; Back to Menu"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="save_and_new_test_ButtonActionPerformed"/>

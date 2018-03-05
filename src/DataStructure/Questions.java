@@ -98,5 +98,12 @@ public class Questions {
         this.difficulty=difficulty;
        
     }
+    public void setQuestionInfo(String stem, String correctAnswer, int difficulty)
+    {
+        this.stem=stem;
+        this.difficulty=difficulty;
+        this.correctAnswer=correctAnswer;
+        
+    }
     
 }
