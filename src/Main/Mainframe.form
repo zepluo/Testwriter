@@ -60,7 +60,7 @@
               <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="77" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="testNameField" min="-2" max="-2" attributes="0"/>
+              <Component id="testNameField" min="-2" pref="100" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="save_and_new_test_Button" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
@@ -153,9 +153,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="testNameField">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="save_and_new_test_Button">
       <Properties>

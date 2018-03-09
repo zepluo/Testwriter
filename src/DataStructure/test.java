@@ -16,6 +16,7 @@ public class test {
     private ArrayList<Questions> testQuestionList;
     private String testName;
     private String testWriter;
+    private int time;
     
     public test()
     {
@@ -28,6 +29,14 @@ public class test {
         this.testQuestionList=new ArrayList<Questions>();
     }
     
+    public int getTime()
+    {
+        return time;
+    }
+    public void setTime(int hour)
+    {
+        time=hour;
+    }
     public ArrayList<Questions> getTestQuestionList()
     {
         return testQuestionList;
@@ -46,7 +55,10 @@ public class test {
     {
         return testWriter;
     }
-          
+     public void setList(ArrayList<Questions> list)
+    {
+        testQuestionList=list;
+    }     
     
     
     

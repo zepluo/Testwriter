@@ -7,27 +7,21 @@ package GUI;
 
 import Main.Mainframe;
 import java.io.File;
-import java.lang.reflect.Method;
 import javax.swing.JDialog;
-import javax.swing.plaf.FileChooserUI;
 
 /**
  *
  * @author zepingluo
  */
-public class SaveTestPanel extends javax.swing.JPanel {
+public class openPanel extends javax.swing.JPanel {
 
-    Mainframe data;
-
+    Mainframe frame;
     /**
-     * Creates new form SaveTestPanel
+     * Creates new form openPanel
      */
-    public SaveTestPanel(Mainframe frame) {
+    public openPanel(Mainframe frame) {
         initComponents();
-        data=frame;
-        fileChooser.setCurrentDirectory(new File("%USERPROFILE%/Desktop"));
-       
-
+        this.frame=frame;
     }
 
     /**
@@ -39,12 +33,12 @@ public class SaveTestPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        fileChooser = new javax.swing.JFileChooser();
+        choose = new javax.swing.JFileChooser();
 
-        fileChooser.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
-        fileChooser.addActionListener(new java.awt.event.ActionListener() {
+        choose.setCurrentDirectory(new File("%USERPROFILE%/Desktop"));
+        choose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fileChooserActionPerformed(evt);
+                chooseActionPerformed(evt);
             }
         });
 
@@ -53,39 +47,43 @@ public class SaveTestPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(fileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(choose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(fileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(choose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fileChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileChooserActionPerformed
-        // TODO add your handling code here:
+    private void chooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseActionPerformed
         if (evt.getActionCommand().equals("CancelSelection"))
         {
             ((JDialog) this.getTopLevelAncestor()).dispose();
+
         }
-        else if (fileChooser.getSelectedFile().getAbsolutePath().equals(null))
+        else if (choose.getSelectedFile().getAbsolutePath().equals(null))
         {
         }
         else
         {
-            data.filePath  = fileChooser.getSelectedFile().getAbsolutePath();
-            data.save();
+            
+                frame.filePath  = choose.getSelectedFile().getAbsolutePath();
+                frame.importTest();
+           
+                
+            }
+            
             ((JDialog) this.getTopLevelAncestor()).dispose();
-        }  
         
-    }//GEN-LAST:event_fileChooserActionPerformed
+    }//GEN-LAST:event_chooseActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFileChooser fileChooser;
+    private javax.swing.JFileChooser choose;
     // End of variables declaration//GEN-END:variables
 }

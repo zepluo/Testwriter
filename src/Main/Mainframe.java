@@ -14,8 +14,11 @@ import GUI.addTestPanel;
 import GUI.openTestPanel;
 import GUI.openPicturePanel;
 import java.awt.BorderLayout;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -35,8 +38,10 @@ public class Mainframe extends javax.swing.JFrame {
     
 
     public ArrayList<test> testList;
+   
     public test currentTest;
-    //for currentTest
+    
+//for currentTest
     public String filePath;
     //this is a list
     
@@ -58,8 +63,9 @@ public class Mainframe extends javax.swing.JFrame {
         initComponents();
         testList = new ArrayList<>();
         removeButton.setEnabled(false);
-        setQuestionPanel(new openTestPanel(this));
         
+        setQuestionPanel(new openTestPanel(this));
+        testNameField.setVisible(false);
     }
 
     public void loadTest(test test)
@@ -72,7 +78,7 @@ public class Mainframe extends javax.swing.JFrame {
         QuestionPanel.updateUI();
         QuestionPanel.removeAll();
         testNameField.setText(currentTest.getTestName());
-        
+        testNameField.setVisible(true);
           drawList();
          
         
@@ -89,7 +95,9 @@ public class Mainframe extends javax.swing.JFrame {
     }
 
     public void loadQuestion() {
-
+        //?
+        removeButton.setEnabled(false);
+        //?
         int type = questionList.get(numQuestion).getType();
         if (type == MULTIPLECHOICE) {
             setQuestionPanel(new MCPanel(this));
@@ -141,29 +149,106 @@ public class Mainframe extends javax.swing.JFrame {
         QuestionList.setModel(dlm);
     }
 
+    public void importTest()
+    {
+       
+        ArrayList<Questions> testQuestionList = new ArrayList<Questions>();
+        
+                try {
+            // Load file and read info to RAM from file
+            BufferedReader loadFile = new BufferedReader(new FileReader(
+                    filePath));
+            String testName=loadFile.readLine();
+            String testWriter=loadFile.readLine();
+            int time=Integer.parseInt(loadFile.readLine());
+            currentTest=new test(testName,testWriter);
+            
+            currentTest.setTime(time);
+            currentTest.setList(testQuestionList);
+            
+            questionList=testQuestionList;
+            numQuestion=-1;
+           
+            String input;
+            
+            
+            // Continue to read in from text file 2 lines for each athlete
+            // while there are still line to be read in
+            // First line is their personal info
+            // Second line is their goal data
+            while ((input = loadFile.readLine()) != null) {
+                
+                
+                String type = input;
+
+                if(type.equalsIgnoreCase("MC"))
+                {
+                    String stem = loadFile.readLine();
+                    
+                    input = loadFile.readLine();
+                    String[] answerChoices = input.split(",");
+                    String correctAnswer=loadFile.readLine();
+                   
+                    int difficulty = Integer.parseInt(loadFile.readLine());
+                    
+                 
+                    String imageString = loadFile.readLine();
+                    testQuestionList.add(new Questions(MULTIPLECHOICE, difficulty, stem, answerChoices,correctAnswer,imageString));
+              
+                }
+                else if(type.equalsIgnoreCase("FRQ"))
+                {
+                    String stem = loadFile.readLine();
+                    String correctAnswer = loadFile.readLine();
+                    
+                    int difficulty = Integer.parseInt(loadFile.readLine());
+                    String imageString = loadFile.readLine();
+                    testQuestionList.add(new Questions(FREERESPONSE,stem,correctAnswer,difficulty, imageString) );
+                    
+                }
+
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error trying to "
+                    + "load file: " + ex,
+                    "Load Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+         testList.add(currentTest);
+        loadTest(currentTest);
+          
+
+    }
     public void save() {
         try {
             PrintWriter writer = new PrintWriter(new File(filePath));
             
             writer.println(currentTest.getTestName());
             writer.println(currentTest.getTestWriter());
+            writer.println(currentTest.getTime());
             for(int n=0;n< questionList.size(); n++)
             {
                 Questions cur = questionList.get(n);
-                writer.println(cur.getType());
+                
                 if(cur.getType()==MULTIPLECHOICE)
                 {
+                    writer.println("MC");
                     writer.println(cur.getStem());
-                    for(int i=0;i<4;i++)
+                    
+                    for(int i=0;i<3;i++)
                     {
-                        writer.println(cur.getChoices()[i]);
+                        writer.print(cur.getChoices()[i]);
+                        writer.print(",");
                     }
+                    writer.println(cur.getChoices()[3]);
                     writer.println(cur.getCorrectAnswer());
                     writer.println(""+cur.getDifficulty());
                     writer.println(cur.getImageFile());
                 }
                 if(cur.getType()==FREERESPONSE)
                 {
+                    writer.println("FRQ");
+                    writer.println(cur.getStem());
                     writer.println(cur.getCorrectAnswer());
                     writer.println(""+cur.getDifficulty());
                     writer.println(cur.getImageFile());
@@ -175,6 +260,8 @@ public class Mainframe extends javax.swing.JFrame {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Mainframe.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
         
     }
 
@@ -247,8 +334,6 @@ public class Mainframe extends javax.swing.JFrame {
 
         jLabel1.setText("Test Name:");
 
-        testNameField.setText("jTextField1");
-
         save_and_new_test_Button.setText("Save & Back to Menu");
         save_and_new_test_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -282,7 +367,7 @@ public class Mainframe extends javax.swing.JFrame {
                 .addGap(114, 114, 114)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(testNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(testNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(save_and_new_test_Button)
                 .addGap(145, 145, 145))
