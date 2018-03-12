@@ -96,7 +96,7 @@ public class Mainframe extends javax.swing.JFrame {
 
     public void loadQuestion() {
         //?
-        removeButton.setEnabled(false);
+        removeButton.setEnabled(true);
         //?
         int type = questionList.get(numQuestion).getType();
         if (type == MULTIPLECHOICE) {
@@ -151,7 +151,7 @@ public class Mainframe extends javax.swing.JFrame {
 
     public void importTest()
     {
-       
+       removeButton.setEnabled(true);
         ArrayList<Questions> testQuestionList = new ArrayList<Questions>();
         
                 try {

@@ -25,7 +25,8 @@ public class SaveTestPanel extends javax.swing.JPanel {
     public SaveTestPanel(Mainframe frame) {
         initComponents();
         data=frame;
-        fileChooser.setCurrentDirectory(new File("%USERPROFILE%/Desktop"));
+        fileChooser.setCurrentDirectory(new File("%USERPROFILE%/Desktop/"+frame.filePath));
+        fileChooser.setSelectedFile(new File("data"));
        
 
     }
