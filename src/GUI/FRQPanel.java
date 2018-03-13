@@ -53,7 +53,7 @@ public class FRQPanel extends javax.swing.JPanel {
         {
             Hard.setSelected(true);
         }
-        
+        fileLabel.setText(cur.getImageFile());
       
         
         
