@@ -25,12 +25,17 @@ public class SaveTestPanel extends javax.swing.JPanel {
     public SaveTestPanel(Mainframe frame) {
         initComponents();
         data=frame;
-        fileChooser.setCurrentDirectory(new File("%USERPROFILE%/Desktop/"+frame.filePath));
-        fileChooser.setSelectedFile(new File("data"));
-       
+        fileChooser.setCurrentDirectory(new File("%USERPROFILE%/Desktop/"));
+        load();
+
 
     }
 
+    
+    public void load()
+    {      
+        fileChooser.setSelectedFile(new File(data.currentTest.getTestName()));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

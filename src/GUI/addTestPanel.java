@@ -132,8 +132,9 @@ public class addTestPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         test newTest=new test();
         frame.testList.add(newTest);
-        frame.loadTest(newTest);
+        
         newTest.setTestInfo(nameArea.getText(), writerArea.getText());
+        frame.loadTest(newTest);
         int hour = Integer.parseInt(h.getText());
         int minutes= Integer.parseInt(m.getText());
         int time= hour*3600+minutes*60;

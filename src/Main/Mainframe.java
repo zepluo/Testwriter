@@ -29,7 +29,6 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-
 /**
  *
  * @author zepingluo
@@ -64,7 +63,6 @@ public class Mainframe extends javax.swing.JFrame {
         initComponents();
         testList = new ArrayList<>();
         removeButton.setEnabled(false);
-        addButton.setEnabled(false);
         
         setQuestionPanel(new openTestPanel(this));
         testNameField.setVisible(false);
@@ -75,7 +73,6 @@ public class Mainframe extends javax.swing.JFrame {
         currentTest= test;
         questionList=currentTest.getTestQuestionList();
         numQuestion=-1;
-        addButton.setEnabled(true);
         
         QuestionPanel.setLayout(new BorderLayout());
         QuestionPanel.updateUI();
@@ -99,8 +96,7 @@ public class Mainframe extends javax.swing.JFrame {
 
     public void loadQuestion() {
         //?
-        //removeButton.setEnabled(true);
-        addButton.setEnabled(true);
+        removeButton.setEnabled(true);
         //?
         int type = questionList.get(numQuestion).getType();
         if (type == MULTIPLECHOICE) {
@@ -155,8 +151,7 @@ public class Mainframe extends javax.swing.JFrame {
 
     public void importTest()
     {
-       //removeButton.setEnabled(true);
-       addButton.setEnabled(true);
+       removeButton.setEnabled(true);
         ArrayList<Questions> testQuestionList = new ArrayList<Questions>();
         
                 try {
@@ -287,8 +282,8 @@ public class Mainframe extends javax.swing.JFrame {
         addButton = new javax.swing.JButton();
         removeButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        testNameField = new javax.swing.JTextField();
         save_and_new_test_Button = new javax.swing.JButton();
+        testNameField = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -346,6 +341,8 @@ public class Mainframe extends javax.swing.JFrame {
             }
         });
 
+        testNameField.setText("jLabel2");
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -365,14 +362,14 @@ public class Mainframe extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(addButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addComponent(QuestionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+                .addGap(33, 33, 33))
             .addGroup(layout.createSequentialGroup()
                 .addGap(114, 114, 114)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(testNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(testNameField)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(save_and_new_test_Button)
                 .addGap(145, 145, 145))
@@ -383,8 +380,8 @@ public class Mainframe extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(testNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(save_and_new_test_Button))
+                    .addComponent(save_and_new_test_Button)
+                    .addComponent(testNameField))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -394,7 +391,7 @@ public class Mainframe extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(QuestionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -402,13 +399,7 @@ public class Mainframe extends javax.swing.JFrame {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
-        
-        if(testList.size() != 0)
-        {
-          addButton.setEnabled(true);
-            addQuestion();
-        }
-        
+        addQuestion();
 
     }//GEN-LAST:event_addButtonActionPerformed
 
@@ -427,10 +418,8 @@ public class Mainframe extends javax.swing.JFrame {
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
         // TODO add your handling code here:
         removeButton.setEnabled(false);
-         
         questionList.remove(numQuestion);
         if(numQuestion>0)
-        //if(questionIndex>0)
         {
             numQuestion--;
             drawList();
@@ -463,8 +452,6 @@ public class Mainframe extends javax.swing.JFrame {
     }
     private void save_and_new_test_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_and_new_test_ButtonActionPerformed
         // TODO add your handling code here:
-        removeButton.setEnabled(false);
-        addButton.setEnabled(false);
         JDialog dialog = new JDialog(this, true);
         dialog.add(new SaveTestPanel(this));
         dialog.pack();
@@ -523,6 +510,6 @@ public class Mainframe extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton removeButton;
     private javax.swing.JButton save_and_new_test_Button;
-    private javax.swing.JTextField testNameField;
+    private javax.swing.JLabel testNameField;
     // End of variables declaration//GEN-END:variables
 }
