@@ -65,6 +65,7 @@ public class Mainframe extends javax.swing.JFrame {
         testList = new ArrayList<>();
         removeButton.setEnabled(false);
         addButton.setEnabled(false);
+        save_and_new_test_Button.setEnabled(false);
         
         setQuestionPanel(new openTestPanel(this));
         testNameField.setVisible(false);
@@ -76,7 +77,7 @@ public class Mainframe extends javax.swing.JFrame {
         questionList=currentTest.getTestQuestionList();
         numQuestion=-1;
         addButton.setEnabled(true);
-        
+        save_and_new_test_Button.setEnabled(true);
         QuestionPanel.setLayout(new BorderLayout());
         QuestionPanel.updateUI();
         QuestionPanel.removeAll();
@@ -101,6 +102,7 @@ public class Mainframe extends javax.swing.JFrame {
         //?
         //removeButton.setEnabled(true);
         addButton.setEnabled(true);
+        save_and_new_test_Button.setEnabled(true);
         //?
         int type = questionList.get(numQuestion).getType();
         if (type == MULTIPLECHOICE) {
@@ -157,6 +159,7 @@ public class Mainframe extends javax.swing.JFrame {
     {
        //removeButton.setEnabled(true);
        addButton.setEnabled(true);
+       save_and_new_test_Button.setEnabled(true);
         ArrayList<Questions> testQuestionList = new ArrayList<Questions>();
         
                 try {
@@ -465,6 +468,7 @@ public class Mainframe extends javax.swing.JFrame {
         // TODO add your handling code here:
         removeButton.setEnabled(false);
         addButton.setEnabled(false);
+        save_and_new_test_Button.setEnabled(false);
         JDialog dialog = new JDialog(this, true);
         dialog.add(new SaveTestPanel(this));
         dialog.pack();
