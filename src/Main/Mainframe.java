@@ -44,6 +44,8 @@ public class Mainframe extends javax.swing.JFrame {
     
 //for currentTest
     public String filePath;
+//for current folder
+    public File folder;
     //this is a list
     
     public ArrayList<Questions> questionList;
@@ -227,7 +229,7 @@ public class Mainframe extends javax.swing.JFrame {
     public void save() {
         try {
             PrintWriter writer = new PrintWriter(new File(filePath));
-            
+            System.out.println("save() and the file path"+filePath);
             writer.println(currentTest.getTestName());
             writer.println(currentTest.getTestWriter());
             writer.println(currentTest.getTime());

@@ -7,6 +7,7 @@ package GUI;
 
 import DataStructure.test;
 import Main.Mainframe;
+import java.io.File;
 import javax.swing.JDialog;
 
 /**
@@ -139,6 +140,17 @@ public class addTestPanel extends javax.swing.JPanel {
         int minutes= Integer.parseInt(m.getText());
         int time= hour*3600+minutes*60;
         newTest.setTime(time);
+        File testFolder = new File("/Users/zepingluo/Documents/testFiles/"+newTest.getTestName());
+        
+        boolean success=testFolder.mkdir();
+        frame.folder=testFolder;
+        System.out.println(frame.folder.getPath());
+       
+        if(success)
+        {
+            System.out.println("success, directory added");
+        }
+        frame.filePath="/Users/zepingluo/Documents/testFiles/"+newTest.getTestName()+"/"+newTest.getTestName();
         ((JDialog) this.getTopLevelAncestor()).dispose();
     }//GEN-LAST:event_addButtonActionPerformed
 

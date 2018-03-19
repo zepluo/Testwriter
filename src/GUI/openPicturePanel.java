@@ -6,8 +6,14 @@
 package GUI;
 
 import DataStructure.Questions;
+import Main.Copy;
 import Main.Mainframe;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 
 /**
@@ -19,7 +25,7 @@ public class openPicturePanel extends javax.swing.JPanel {
     Mainframe frame;
     int numQuestion;
     ArrayList<Questions> questionList;
-   
+    File folder;
     /**
      * Creates new form openPanel
      */
@@ -27,9 +33,9 @@ public class openPicturePanel extends javax.swing.JPanel {
         initComponents();
         numQuestion= frame.numQuestion;
         questionList=frame.questionList;
-       
-    }
-
+        folder=frame.folder;
+       }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,17 +57,16 @@ public class openPicturePanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(fileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(fileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 12, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -77,14 +82,16 @@ public class openPicturePanel extends javax.swing.JPanel {
         }
         else
         {
-               //record into question
+            //record into question
             String filepath = fileChooser.getSelectedFile().getAbsolutePath();
             System.out.println(filepath);
             System.out.println(""+numQuestion);
-            
+            System.out.println(folder.getPath());
             questionList.get(numQuestion).setImageFile(filepath);
-
-                
+             Copy copy = new Copy();
+               
+            copy.copyFile(new File(filepath), new File(folder.getPath()+"/p"+numQuestion+".jpg"),false);
+            
         }
                 ((JDialog) this.getTopLevelAncestor()).dispose();
     }//GEN-LAST:event_fileChooserActionPerformed
