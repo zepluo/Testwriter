@@ -84,13 +84,16 @@ public class openPicturePanel extends javax.swing.JPanel {
         {
             //record into question
             String filepath = fileChooser.getSelectedFile().getAbsolutePath();
-            System.out.println(filepath);
-            System.out.println(""+numQuestion);
-            System.out.println(folder.getPath());
+           
+            
             questionList.get(numQuestion).setImageFile(filepath);
-             Copy copy = new Copy();
+            
                
-            copy.copyFile(new File(filepath), new File(folder.getPath()+"/p"+numQuestion+".jpg"),false);
+             try {
+                 Copy.copyFile(new File(filepath), new File(folder.getPath()+"/p"+numQuestion+".jpg"));
+             } catch (IOException ex) {
+                 Logger.getLogger(openPicturePanel.class.getName()).log(Level.SEVERE, null, ex);
+             }
             
         }
                 ((JDialog) this.getTopLevelAncestor()).dispose();

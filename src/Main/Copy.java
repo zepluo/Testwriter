@@ -17,13 +17,47 @@ public class Copy
 {
 	public static void main(String[] args) throws IOException
 	{
-		File file = new File("/Users/zepingluo/downloads/calc.png");
-		File target = new File("/Users/zepingluo/documents/calc1.png");
+		File file = new File("/Users/zepingluo/downloads/cat.jpg");
+		File target = new File("/Users/zepingluo/documents/catcopied.jpg");
                // System.out.println(file.getPath());
                Copy copy = new Copy();
-                copy.copyFile(file,target,false);
+                //copy.copyFile(file,target,false);
+                Copy.copyFile(file, target);
         }
+     
+    public static void copyFile(File sourceFile, File destFile)
+            throws IOException {
+        if (!sourceFile.exists()) {
+            System.out.println("!sourceFile.exists");
+            return;
+        }
+        if (!destFile.exists()) {
+            destFile.createNewFile();
+            System.out.println("!destFile.exists()");
+        }
+        FileChannel source = null;
+        FileChannel destination = null;
+        source = new FileInputStream(sourceFile).getChannel();
+        destination = new FileOutputStream(destFile).getChannel();
+        if (destination != null && source != null) {
+            destination.transferFrom(source, 0, source.size());
+            System.out.println("transfered");
+        }
+        if (source != null) {
+            source.close();
+        }
+        if (destination != null) {
+            destination.close();
+        }
+
+    }
+
+
         
+        
+        
+        
+        //****
         public void copyFile(File aSourceFile, File aTargetFile, boolean aAppend) {
     log("Copying files with streams.");
     ensureTargetDirectoryExists(aTargetFile.getParentFile());

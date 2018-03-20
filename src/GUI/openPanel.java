@@ -71,8 +71,9 @@ public class openPanel extends javax.swing.JPanel {
         }
         else
         {
-                frame.filePath  = choose.getSelectedFile().getAbsolutePath();
-                frame.importTest();
+                String filePath  = choose.getSelectedFile().getAbsolutePath();
+                frame.importTest(filePath);
+                frame.loadTest(frame.currentTest);
            
                 
             }

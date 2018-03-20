@@ -64,15 +64,35 @@ public class Mainframe extends javax.swing.JFrame {
      */
     public Mainframe() {
         initComponents();
+        
         testList = new ArrayList<>();
+        iniImport();
         removeButton.setEnabled(false);
         addButton.setEnabled(false);
         save_and_new_test_Button.setEnabled(false);
         
         setQuestionPanel(new openTestPanel(this));
         testNameField.setVisible(false);
+        
+        
     }
 
+    public void iniImport()
+    {
+        //import tests in testFiles
+        
+         File directory = new File("/Users/zepingluo/documents/testFiles");
+        File[] contents = directory.listFiles();
+        for(int i=1;i<contents.length;i++)
+        {
+            importTest(contents[i].getAbsolutePath()+"/"+contents[i].getName());
+            
+        }
+        for(int i=0;i<testList.size();i++)
+        {
+            System.out.println(testList.get(i).getTestName());
+        }
+    }
     public void loadTest(test test)
     {
         currentTest= test;
@@ -157,7 +177,7 @@ public class Mainframe extends javax.swing.JFrame {
         QuestionList.setModel(dlm);
     }
 
-    public void importTest()
+    public void importTest(String filePath)
     {
        //removeButton.setEnabled(true);
        addButton.setEnabled(true);
@@ -225,7 +245,7 @@ public class Mainframe extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
         }
          testList.add(currentTest);
-        loadTest(currentTest);
+        //loadTest(currentTest);
           
 
     }

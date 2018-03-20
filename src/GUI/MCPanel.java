@@ -7,7 +7,10 @@ package GUI;
 
 import DataStructure.Questions;
 import Main.Mainframe;
+import java.awt.BorderLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 
 /**
  *
@@ -81,7 +84,16 @@ public class MCPanel extends javax.swing.JPanel {
             Hard.setSelected(true);
         }
         
+      //image Loading
       
+      ImageIcon image = new ImageIcon(new ImageIcon(cur.getImageFile()).getImage().getScaledInstance(200, 200, 0));
+        System.out.println("MCPANEl loading imagefile...."+cur.getImageFile());
+        JLabel imageL = new JLabel(image);
+        
+        imagePanel.setLayout(new BorderLayout());
+            imagePanel.updateUI();
+           imagePanel.removeAll();
+        imagePanel.add(imageL,BorderLayout.CENTER);
         
         
     }
@@ -122,30 +134,46 @@ public class MCPanel extends javax.swing.JPanel {
         Easy = new javax.swing.JRadioButton();
         Medium = new javax.swing.JRadioButton();
         Hard = new javax.swing.JRadioButton();
+        imagePanel = new javax.swing.JPanel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(choiceA, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 164, 404, -1));
 
         choiceB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 choiceBActionPerformed(evt);
             }
         });
+        add(choiceB, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 196, 404, -1));
+        add(choiceC, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 228, 404, -1));
+        add(choiceD, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 260, 404, -1));
 
         stemArea.setColumns(20);
         stemArea.setRows(5);
         jScrollPane1.setViewportView(stemArea);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 40, 520, 118));
+
         jLabel1.setText("Enter Question below");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 18, 169, -1));
 
         Alabel.setText("Enter Option A");
+        add(Alabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 164, -1, -1));
 
         Blabel.setText("Enter Option B");
+        add(Blabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 201, 113, -1));
 
         Clabel.setText("Enter Option C");
+        add(Clabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 233, 110, -1));
 
         Dlabel.setText("Enter Option D");
+        add(Dlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 265, 110, -1));
 
         difficultyLabel.setText("difficulty");
+        add(difficultyLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 330, -1, -1));
 
         imageFileLabel.setText("Image File");
+        add(imageFileLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 360, -1, -1));
 
         chooseFile.setText("chooseFile");
         chooseFile.addActionListener(new java.awt.event.ActionListener() {
@@ -153,6 +181,7 @@ public class MCPanel extends javax.swing.JPanel {
                 chooseFileActionPerformed(evt);
             }
         });
+        add(chooseFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 355, -1, -1));
 
         saveButton.setText("save");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
@@ -160,9 +189,12 @@ public class MCPanel extends javax.swing.JPanel {
                 saveButtonActionPerformed(evt);
             }
         });
+        add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(572, 355, -1, -1));
+        add(questionNumLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 6, 146, -1));
 
         buttonGroup2.add(B);
         B.setText("B");
+        add(B, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 193, -1, -1));
 
         buttonGroup2.add(A);
         A.setText("A");
@@ -171,9 +203,11 @@ public class MCPanel extends javax.swing.JPanel {
                 AActionPerformed(evt);
             }
         });
+        add(A, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 164, -1, -1));
 
         buttonGroup2.add(C);
         C.setText("C");
+        add(C, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 229, -1, -1));
 
         buttonGroup2.add(D);
         D.setText("D");
@@ -182,14 +216,18 @@ public class MCPanel extends javax.swing.JPanel {
                 DActionPerformed(evt);
             }
         });
+        add(D, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 261, -1, -1));
 
         fileLabel.setText("jLabel2");
+        add(fileLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 360, 347, -1));
 
         buttonGroup1.add(Easy);
         Easy.setText("Easy");
+        add(Easy, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 326, -1, -1));
 
         buttonGroup1.add(Medium);
         Medium.setText("Medium");
+        add(Medium, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 326, -1, -1));
 
         buttonGroup1.add(Hard);
         Hard.setText("Hard");
@@ -198,111 +236,20 @@ public class MCPanel extends javax.swing.JPanel {
                 HardActionPerformed(evt);
             }
         });
+        add(Hard, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 326, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(imageFileLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(chooseFile)
-                                .addGap(26, 26, 26)
-                                .addComponent(fileLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(difficultyLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Easy)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Medium)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Hard)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 277, Short.MAX_VALUE)
-                                .addComponent(saveButton))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(choiceA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(22, 22, 22)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(Clabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(Dlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(choiceD, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(choiceC)
-                                        .addComponent(choiceB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Blabel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Alabel))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(B)
-                            .addComponent(A)
-                            .addComponent(C)
-                            .addComponent(D)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(questionNumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(63, 63, 63))
+        javax.swing.GroupLayout imagePanelLayout = new javax.swing.GroupLayout(imagePanel);
+        imagePanel.setLayout(imagePanelLayout);
+        imagePanelLayout.setHorizontalGroup(
+            imagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 188, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(questionNumLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Alabel)
-                            .addComponent(choiceA, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(choiceB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Blabel)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(A)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(B)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(choiceC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Clabel)
-                    .addComponent(C))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(choiceD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Dlabel)
-                    .addComponent(D))
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(difficultyLabel)
-                    .addComponent(saveButton)
-                    .addComponent(Easy)
-                    .addComponent(Medium)
-                    .addComponent(Hard))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chooseFile)
-                    .addComponent(imageFileLabel)
-                    .addComponent(fileLabel))
-                .addContainerGap())
+        imagePanelLayout.setVerticalGroup(
+            imagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 157, Short.MAX_VALUE)
         );
+
+        add(imagePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(614, 129, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void choiceBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choiceBActionPerformed
@@ -317,6 +264,7 @@ public class MCPanel extends javax.swing.JPanel {
         dialog.pack();
         dialog.setVisible(true);
         fileLabel.setText(frame.questionList.get(frame.numQuestion).getImageFile());
+        load();
     }//GEN-LAST:event_chooseFileActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
@@ -388,6 +336,7 @@ public class MCPanel extends javax.swing.JPanel {
     private javax.swing.JLabel difficultyLabel;
     private javax.swing.JLabel fileLabel;
     private javax.swing.JLabel imageFileLabel;
+    private javax.swing.JPanel imagePanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel questionNumLabel;
