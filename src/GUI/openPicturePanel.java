@@ -25,7 +25,7 @@ public class openPicturePanel extends javax.swing.JPanel {
     Mainframe frame;
     int numQuestion;
     ArrayList<Questions> questionList;
-    File folder;
+    String folderPath;
     /**
      * Creates new form openPanel
      */
@@ -33,7 +33,7 @@ public class openPicturePanel extends javax.swing.JPanel {
         initComponents();
         numQuestion= frame.numQuestion;
         questionList=frame.questionList;
-        folder=frame.folder;
+        folderPath=frame.folderPath;
        }
     
     /**
@@ -86,15 +86,17 @@ public class openPicturePanel extends javax.swing.JPanel {
             String filepath = fileChooser.getSelectedFile().getAbsolutePath();
            
             
-            questionList.get(numQuestion).setImageFile(filepath);
+            
             
                
              try {
-                 Copy.copyFile(new File(filepath), new File(folder.getPath()+"/p"+numQuestion+".jpg"));
+                 System.out.println("openpic folder path:"+folderPath);
+                 Copy.copyFile(new File(filepath), new File(folderPath+"/q"+(numQuestion+1)+".jpg"));
              } catch (IOException ex) {
                  Logger.getLogger(openPicturePanel.class.getName()).log(Level.SEVERE, null, ex);
              }
-            
+             questionList.get(numQuestion).setImageFile(folderPath+"/q"+(numQuestion+1)+".jpg");
+             
         }
                 ((JDialog) this.getTopLevelAncestor()).dispose();
     }//GEN-LAST:event_fileChooserActionPerformed

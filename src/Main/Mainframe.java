@@ -45,7 +45,7 @@ public class Mainframe extends javax.swing.JFrame {
 //for currentTest
     public String filePath;
 //for current folder
-    public File folder;
+    public String folderPath;
     //this is a list
     
     public ArrayList<Questions> questionList;
@@ -58,7 +58,7 @@ public class Mainframe extends javax.swing.JFrame {
     public static final int UNKNOWN = -1;
     public static final int MULTIPLECHOICE = 0;
     public static final int FREERESPONSE = 1;
-
+    public static final String DIRECTORY = "/Users/zepingluo/documents/testFiles";
     /**
      * Creates new form Mainframe
      */
@@ -81,7 +81,7 @@ public class Mainframe extends javax.swing.JFrame {
     {
         //import tests in testFiles
         
-         File directory = new File("/Users/zepingluo/documents/testFiles");
+         File directory = new File(DIRECTORY);
         File[] contents = directory.listFiles();
         for(int i=1;i<contents.length;i++)
         {
