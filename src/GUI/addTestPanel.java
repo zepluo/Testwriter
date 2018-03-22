@@ -140,16 +140,20 @@ public class addTestPanel extends javax.swing.JPanel {
         int minutes= Integer.parseInt(m.getText());
         int time= hour*3600+minutes*60;
         newTest.setTime(time);
-        File testFolder = new File(frame.DIRECTORY+"/"+newTest.getTestName());
+        //initialize a new folder under the default directory
+        File testFolder = new File(frame.DEFAULTDIRECTORY+"/"+newTest.getTestName());
         
         boolean success=testFolder.mkdir();
-        frame.folderPath=testFolder.getAbsolutePath();
-       
         if(success)
         {
             System.out.println("success, directory added");
         }
-        frame.filePath=frame.DIRECTORY+"/"+newTest.getTestName()+"/"+newTest.getTestName();
+        frame.folderPath=testFolder.getAbsolutePath();
+        //
+        File testFile = new File(frame.DEFAULTDIRECTORY+"/"+newTest.getTestName()+"/"+newTest.getTestName());
+        
+        frame.filePath=testFile.getAbsolutePath();
+        
         ((JDialog) this.getTopLevelAncestor()).dispose();
     }//GEN-LAST:event_addButtonActionPerformed
 

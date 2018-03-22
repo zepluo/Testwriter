@@ -61,16 +61,7 @@ public class FRQPanel extends javax.swing.JPanel {
         
            
       //image Loading
-      
-      ImageIcon image = new ImageIcon(new ImageIcon(cur.getImageFile()).getImage().getScaledInstance(200, 200, 0));
-        System.out.println("MCPANEl loading imagefile...."+cur.getImageFile());
-        JLabel imageL = new JLabel(image);
-        
-        imagePanel.setLayout(new BorderLayout());
-            imagePanel.updateUI();
-           imagePanel.removeAll();
-        imagePanel.add(imageL,BorderLayout.CENTER);
-        
+     imageLoad();
         
     
     
@@ -272,7 +263,19 @@ public class FRQPanel extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_saveButtonActionPerformed
-
+     private void imageLoad()
+    {
+        Questions cur = frame.questionList.get(frame.numQuestion);
+         ImageIcon image = new ImageIcon(new ImageIcon(cur.getImageFile()).getImage().getScaledInstance(200, 200, 0));
+        System.out.println("MCPANEl loading imagefile...."+cur.getImageFile());
+        JLabel imageL = new JLabel(image);
+        
+        imagePanel.setLayout(new BorderLayout());
+            imagePanel.updateUI();
+           imagePanel.removeAll();
+        imagePanel.add(imageL,BorderLayout.CENTER);
+        
+    }
     private void chooseFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseFileActionPerformed
         // TODO add your handling code here:
         JDialog dialog = new JDialog(frame, true);
@@ -280,7 +283,7 @@ public class FRQPanel extends javax.swing.JPanel {
         dialog.pack();
         dialog.setVisible(true);
         fileLabel.setText(frame.questionList.get(frame.numQuestion).getImageFile());
-        load();
+        imageLoad();
     }//GEN-LAST:event_chooseFileActionPerformed
 
 

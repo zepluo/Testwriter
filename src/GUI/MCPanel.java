@@ -85,8 +85,15 @@ public class MCPanel extends javax.swing.JPanel {
         }
         
       //image Loading
-      
-      ImageIcon image = new ImageIcon(new ImageIcon(cur.getImageFile()).getImage().getScaledInstance(200, 200, 0));
+      imageLoad();
+     
+        
+    }
+    
+    private void imageLoad()
+    {
+        Questions cur = frame.questionList.get(frame.numQuestion);
+         ImageIcon image = new ImageIcon(new ImageIcon(cur.getImageFile()).getImage().getScaledInstance(200, 200, 0));
         System.out.println("MCPANEl loading imagefile...."+cur.getImageFile());
         JLabel imageL = new JLabel(image);
         
@@ -95,10 +102,7 @@ public class MCPanel extends javax.swing.JPanel {
            imagePanel.removeAll();
         imagePanel.add(imageL,BorderLayout.CENTER);
         
-        
     }
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -264,7 +268,7 @@ public class MCPanel extends javax.swing.JPanel {
         dialog.pack();
         dialog.setVisible(true);
         fileLabel.setText(frame.questionList.get(frame.numQuestion).getImageFile());
-        load();
+        imageLoad();
     }//GEN-LAST:event_chooseFileActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed

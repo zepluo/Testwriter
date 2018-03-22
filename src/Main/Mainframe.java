@@ -58,7 +58,8 @@ public class Mainframe extends javax.swing.JFrame {
     public static final int UNKNOWN = -1;
     public static final int MULTIPLECHOICE = 0;
     public static final int FREERESPONSE = 1;
-    public static final String DIRECTORY = "/Users/zepingluo/documents/testFiles";
+    public static final String DEFAULTDIRECTORY = "/Users/zepingluo/documents/testFiles";
+    
     /**
      * Creates new form Mainframe
      */
@@ -81,7 +82,7 @@ public class Mainframe extends javax.swing.JFrame {
     {
         //import tests in testFiles
         
-         File directory = new File(DIRECTORY);
+         File directory = new File(DEFAULTDIRECTORY);
         File[] contents = directory.listFiles();
         for(int i=1;i<contents.length;i++)
         {
@@ -312,8 +313,8 @@ public class Mainframe extends javax.swing.JFrame {
         addButton = new javax.swing.JButton();
         removeButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        testNameField = new javax.swing.JTextField();
         save_and_new_test_Button = new javax.swing.JButton();
+        testNameField = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -396,8 +397,8 @@ public class Mainframe extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(114, 114, 114)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(testNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(testNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(save_and_new_test_Button)
                 .addGap(145, 145, 145))
@@ -408,8 +409,8 @@ public class Mainframe extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(testNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(save_and_new_test_Button))
+                    .addComponent(save_and_new_test_Button)
+                    .addComponent(testNameField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -549,6 +550,6 @@ public class Mainframe extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton removeButton;
     private javax.swing.JButton save_and_new_test_Button;
-    private javax.swing.JTextField testNameField;
+    private javax.swing.JLabel testNameField;
     // End of variables declaration//GEN-END:variables
 }
