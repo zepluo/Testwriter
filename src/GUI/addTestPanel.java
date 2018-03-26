@@ -152,7 +152,7 @@ public class addTestPanel extends javax.swing.JPanel {
         //
         File testFile = new File(frame.DEFAULTDIRECTORY+"/"+newTest.getTestName()+"/"+newTest.getTestName());
         
-        frame.filePath=testFile.getAbsolutePath();
+        frame.testFilePath=testFile.getAbsolutePath();
         
         ((JDialog) this.getTopLevelAncestor()).dispose();
     }//GEN-LAST:event_addButtonActionPerformed

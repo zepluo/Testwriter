@@ -29,7 +29,7 @@ public class Questions {
     {
         this.type =type;
     }
-    public Questions(int type, int difficulty, String stem, String[] choices, String correctAnswer,String imageFile)
+    public Questions(int type, int difficulty, String stem, String[] choices, String correctAnswer)
     {
        this.difficulty = difficulty;
        this.stem = stem;
@@ -37,17 +37,16 @@ public class Questions {
        this.correctAnswer = correctAnswer;
         this.type = type;
         userAnswer = "";
-        this.imageFile = imageFile;
-    }
+           }
 
-    public Questions(int type, String stem, String correctAnswer, int difficulty, String imageFile) {
+    public Questions(int type, String stem, String correctAnswer, int difficulty) {
         this.type = type;
         this.difficulty = difficulty;
         this.stem = stem;
         this.correctAnswer = correctAnswer;
         userAnswer = "";
         this.choices = null;
-        this.imageFile=imageFile;
+   
 
     }
 

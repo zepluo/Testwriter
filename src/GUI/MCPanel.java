@@ -267,6 +267,8 @@ public class MCPanel extends javax.swing.JPanel {
         dialog.add(new openPicturePanel(frame));
         dialog.pack();
         dialog.setVisible(true);
+        
+        //for showing up the imagefile and the picture instantly 
         fileLabel.setText(frame.questionList.get(frame.numQuestion).getImageFile());
         imageLoad();
     }//GEN-LAST:event_chooseFileActionPerformed

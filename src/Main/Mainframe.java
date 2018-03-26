@@ -27,6 +27,7 @@ import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.QUESTION_MESSAGE;
 import javax.swing.JPanel;
 
 
@@ -42,24 +43,33 @@ public class Mainframe extends javax.swing.JFrame {
    
     public test currentTest;
     
-//for currentTest
-    public String filePath;
-//for current folder
+    //for currentTest, the testFilePath would be in
+    //" folderPath/testName " format
+    //representing a test text file.
+    
+    public String testFilePath;
+    
+    //for current folder, the folderPath would be in 
+    //" DefaultDirectory/testName " format
+    //representing a directory contatining test text file and 
+    //pictures.
+    
     public String folderPath;
     //this is a list
+    
     
     public ArrayList<Questions> questionList;
     //this is for the correct display of question in the order
     public int numQuestion;
-
+    
     public static final int EASY = 0;
     public static final int MEDIUM = 1;
     public static final int HARD = 2;
     public static final int UNKNOWN = -1;
     public static final int MULTIPLECHOICE = 0;
     public static final int FREERESPONSE = 1;
-    public static final String DEFAULTDIRECTORY = "/Users/zepingluo/documents/testFiles";
-    
+    public static String DEFAULTDIRECTORY ;
+    //public static final String DEFAULTDIRECTORY = "/Users/zepingluo/documents/testFiles";
     /**
      * Creates new form Mainframe
      */
@@ -77,16 +87,27 @@ public class Mainframe extends javax.swing.JFrame {
         
         
     }
-
+    
+    //this methods first ask for the default directory from which the program imports test,
+    //to which the program adds new tests
     public void iniImport()
     {
         //import tests in testFiles
+        String input = JOptionPane.showInputDialog(this, "enter the default", "info", QUESTION_MESSAGE);
+        if(input.equals("danny"))
+        {
+              DEFAULTDIRECTORY="/Users/zepingluo/documents/testFiles";
+        }else
+        {
+            DEFAULTDIRECTORY=input;
+        }
+      
         
-         File directory = new File(DEFAULTDIRECTORY);
+        File directory = new File(DEFAULTDIRECTORY);
         File[] contents = directory.listFiles();
         for(int i=1;i<contents.length;i++)
         {
-            importTest(contents[i].getAbsolutePath()+"/"+contents[i].getName());
+            importTest(contents[i].getAbsolutePath());
             
         }
         for(int i=0;i<testList.size();i++)
@@ -178,17 +199,18 @@ public class Mainframe extends javax.swing.JFrame {
         QuestionList.setModel(dlm);
     }
 
-    public void importTest(String filePath)
+    public void importTest(String folderPath)
     {
        //removeButton.setEnabled(true);
        addButton.setEnabled(true);
        save_and_new_test_Button.setEnabled(true);
         ArrayList<Questions> testQuestionList = new ArrayList<Questions>();
-        
+       
+        String[] filePath=folderPath.split("/");
+        testFilePath=folderPath+"/"+filePath[filePath.length-1];
                 try {
             // Load file and read info to RAM from file
-            BufferedReader loadFile = new BufferedReader(new FileReader(
-                    filePath));
+            BufferedReader loadFile = new BufferedReader(new FileReader(testFilePath));
             String testName=loadFile.readLine();
             String testWriter=loadFile.readLine();
             int time=Integer.parseInt(loadFile.readLine());
@@ -222,9 +244,7 @@ public class Mainframe extends javax.swing.JFrame {
                    
                     int difficulty = Integer.parseInt(loadFile.readLine());
                     
-                 
-                    String imageString = loadFile.readLine();
-                    testQuestionList.add(new Questions(MULTIPLECHOICE, difficulty, stem, answerChoices,correctAnswer,imageString));
+                    testQuestionList.add(new Questions(MULTIPLECHOICE, difficulty, stem, answerChoices,correctAnswer));
               
                 }
                 else if(type.equalsIgnoreCase("FRQ"))
@@ -233,8 +253,7 @@ public class Mainframe extends javax.swing.JFrame {
                     String correctAnswer = loadFile.readLine();
                     
                     int difficulty = Integer.parseInt(loadFile.readLine());
-                    String imageString = loadFile.readLine();
-                    testQuestionList.add(new Questions(FREERESPONSE,stem,correctAnswer,difficulty, imageString) );
+                    testQuestionList.add(new Questions(FREERESPONSE,stem,correctAnswer,difficulty) );
                     
                 }
 
@@ -245,15 +264,23 @@ public class Mainframe extends javax.swing.JFrame {
                     "Load Error",
                     JOptionPane.ERROR_MESSAGE);
         }
-         testList.add(currentTest);
+
+        for (int i = 1; i <= questionList.size(); i++) {
+            File file = new File(folderPath + "/" + "q" + i + ".jpg");
+            if (file.exists()) {
+
+                questionList.get(i - 1).setImageFile(file.getAbsolutePath());
+            }
+        }
+        testList.add(currentTest);
         //loadTest(currentTest);
           
 
     }
     public void save() {
         try {
-            PrintWriter writer = new PrintWriter(new File(filePath));
-            System.out.println("save() and the file path"+filePath);
+            PrintWriter writer = new PrintWriter(new File(testFilePath));
+            System.out.println("save() and the file path"+testFilePath);
             writer.println(currentTest.getTestName());
             writer.println(currentTest.getTestWriter());
             writer.println(currentTest.getTime());
@@ -274,7 +301,7 @@ public class Mainframe extends javax.swing.JFrame {
                     writer.println(cur.getChoices()[3]);
                     writer.println(cur.getCorrectAnswer());
                     writer.println(""+cur.getDifficulty());
-                    writer.println(cur.getImageFile());
+                    //writer.println(cur.getImageFile());
                 }
                 if(cur.getType()==FREERESPONSE)
                 {
@@ -282,7 +309,7 @@ public class Mainframe extends javax.swing.JFrame {
                     writer.println(cur.getStem());
                     writer.println(cur.getCorrectAnswer());
                     writer.println(""+cur.getDifficulty());
-                    writer.println(cur.getImageFile());
+                   // writer.println(cur.getImageFile());
                 }
                 
             }

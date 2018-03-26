@@ -34,7 +34,7 @@ public class SaveTestPanel extends javax.swing.JPanel {
     
     public void load()
     {      
-        fileChooser.setSelectedFile(new File(data.filePath));
+        fileChooser.setSelectedFile(new File(data.testFilePath));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,7 +84,7 @@ public class SaveTestPanel extends javax.swing.JPanel {
         else
         {
             //if you want to change it... then...
-            data.filePath  = fileChooser.getSelectedFile().getAbsolutePath();
+            data.testFilePath  = fileChooser.getSelectedFile().getAbsolutePath();
             data.save();
             ((JDialog) this.getTopLevelAncestor()).dispose();
         }  

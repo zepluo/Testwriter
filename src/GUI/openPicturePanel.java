@@ -85,12 +85,10 @@ public class openPicturePanel extends javax.swing.JPanel {
             //record into question
             String filepath = fileChooser.getSelectedFile().getAbsolutePath();
            
-            
-            
-            
-               
              try {
                  System.out.println("openpic folder path:"+folderPath);
+                 //the new picture file will be in the folder + "/q1.jpg" and so on format
+                 //the number being the question number
                  Copy.copyFile(new File(filepath), new File(folderPath+"/q"+(numQuestion+1)+".jpg"));
              } catch (IOException ex) {
                  Logger.getLogger(openPicturePanel.class.getName()).log(Level.SEVERE, null, ex);
