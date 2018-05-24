@@ -108,7 +108,6 @@ public class Mainframe extends javax.swing.JFrame {
         for(int i=1;i<contents.length;i++)
         {
             importTest(contents[i].getAbsolutePath());
-            
         }
         for(int i=0;i<testList.size();i++)
         {

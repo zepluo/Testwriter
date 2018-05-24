@@ -20,10 +20,24 @@ public class Copy
 		File file = new File("/Users/zepingluo/downloads/cat.jpg");
 		File target = new File("/Users/zepingluo/documents/catcopied.jpg");
                // System.out.println(file.getPath());
-               Copy copy = new Copy();
+              // Copy copy = new Copy();
                 //copy.copyFile(file,target,false);
-                Copy.copyFile(file, target);
+               // Copy.copyFile(file, target);
+               
+               Copy copy= new Copy();
+               String str="123";
+               copy.str(str);
+               System.out.println(str);
+               String x= "123";
+               str(x);
+               System.out.println(x);               
         }
+        public static void str(String str)
+        {
+           str="234";
+        }
+        
+        
      
     public static void copyFile(File sourceFile, File destFile)
             throws IOException {
