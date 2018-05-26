@@ -8,6 +8,7 @@ package GUI;
 import DataStructure.Questions;
 import Main.Copy;
 import Main.Mainframe;
+import java.awt.Color;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
@@ -34,6 +35,7 @@ public class openPicturePanel extends javax.swing.JPanel {
         numQuestion= frame.numQuestion;
         questionList=frame.questionList;
         folderPath=frame.folderPath;
+        this.setBackground(new Color(204,204,255));
        }
     
     /**

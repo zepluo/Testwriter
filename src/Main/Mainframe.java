@@ -14,6 +14,7 @@ import GUI.addTestPanel;
 import GUI.openTestPanel;
 import GUI.openPicturePanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -84,7 +85,7 @@ public class Mainframe extends javax.swing.JFrame {
         
         setQuestionPanel(new openTestPanel(this));
         testNameField.setVisible(false);
-        
+        this.getContentPane().setBackground(new Color(204,204,255));
         
     }
     
@@ -346,12 +347,15 @@ public class Mainframe extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 204, 255));
+        setPreferredSize(new java.awt.Dimension(1050, 601));
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 formMouseDragged(evt);
             }
         });
 
+        QuestionList.setFont(new java.awt.Font("Times", 1, 14)); // NOI18N
         QuestionList.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 QuestionListMouseDragged(evt);
@@ -364,6 +368,8 @@ public class Mainframe extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(QuestionList);
 
+        QuestionPanel.setBackground(new java.awt.Color(204, 204, 255));
+
         javax.swing.GroupLayout QuestionPanelLayout = new javax.swing.GroupLayout(QuestionPanel);
         QuestionPanel.setLayout(QuestionPanelLayout);
         QuestionPanelLayout.setHorizontalGroup(
@@ -375,6 +381,8 @@ public class Mainframe extends javax.swing.JFrame {
             .addGap(0, 509, Short.MAX_VALUE)
         );
 
+        addButton.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
+        addButton.setForeground(new java.awt.Color(51, 51, 255));
         addButton.setText("Add New Question");
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -382,6 +390,8 @@ public class Mainframe extends javax.swing.JFrame {
             }
         });
 
+        removeButton.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
+        removeButton.setForeground(new java.awt.Color(255, 51, 51));
         removeButton.setText("Remove Question");
         removeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -389,14 +399,18 @@ public class Mainframe extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
         jLabel1.setText("Test Name:");
 
+        save_and_new_test_Button.setFont(jLabel1.getFont());
         save_and_new_test_Button.setText("Save & Back to Menu");
         save_and_new_test_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 save_and_new_test_ButtonActionPerformed(evt);
             }
         });
+
+        testNameField.setFont(jLabel1.getFont());
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -413,16 +427,16 @@ public class Mainframe extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(addButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                        .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(addButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(QuestionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
             .addGroup(layout.createSequentialGroup()
                 .addGap(114, 114, 114)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(testNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -441,10 +455,10 @@ public class Mainframe extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
-                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(removeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(QuestionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -515,6 +529,8 @@ public class Mainframe extends javax.swing.JFrame {
     }
     private void save_and_new_test_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_and_new_test_ButtonActionPerformed
         // TODO add your handling code here:
+        
+        
         removeButton.setEnabled(false);
         addButton.setEnabled(false);
         save_and_new_test_Button.setEnabled(false);

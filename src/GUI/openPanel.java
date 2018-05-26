@@ -6,6 +6,7 @@
 package GUI;
 
 import Main.Mainframe;
+import java.awt.Color;
 import java.io.File;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -24,6 +25,7 @@ public class openPanel extends javax.swing.JPanel {
         initComponents();
         this.frame=frame;
         choose.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        this.setBackground(new Color(204,204,255));
     }
 
     /**

@@ -8,6 +8,7 @@ package GUI;
 import DataStructure.Questions;
 import Main.Mainframe;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -26,13 +27,15 @@ public class MCPanel extends javax.swing.JPanel {
         this.frame = frame;
         initComponents();
         load();
+        this.setBackground(new Color(204,204,255));
     }
     
     public void load()
     {
+        
         A.setSelected(true);
         Easy.setSelected(true);
-        questionNumLabel.setText("Question # "+(frame.numQuestion+1));
+        questionNumberLabel.setText("Question # "+(frame.numQuestion+1));
           
         Questions cur = frame.questionList.get(frame.numQuestion);
         choiceA.setText(cur.getChoices()[0]);
@@ -129,7 +132,6 @@ public class MCPanel extends javax.swing.JPanel {
         imageFileLabel = new javax.swing.JLabel();
         chooseFile = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
-        questionNumLabel = new javax.swing.JLabel();
         B = new javax.swing.JRadioButton();
         A = new javax.swing.JRadioButton();
         C = new javax.swing.JRadioButton();
@@ -139,68 +141,87 @@ public class MCPanel extends javax.swing.JPanel {
         Medium = new javax.swing.JRadioButton();
         Hard = new javax.swing.JRadioButton();
         imagePanel = new javax.swing.JPanel();
+        questionNumberLabel = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(choiceA, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 164, 404, -1));
 
+        choiceA.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        add(choiceA, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 166, 410, 30));
+
+        choiceB.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         choiceB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 choiceBActionPerformed(evt);
             }
         });
-        add(choiceB, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 196, 404, -1));
-        add(choiceC, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 228, 404, -1));
-        add(choiceD, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 260, 404, -1));
+        add(choiceB, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 196, 410, 30));
+
+        choiceC.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        add(choiceC, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 226, 410, 30));
+
+        choiceD.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        add(choiceD, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 256, 404, 30));
 
         stemArea.setColumns(20);
+        stemArea.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         stemArea.setRows(5);
         jScrollPane1.setViewportView(stemArea);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 40, 520, 118));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 520, 118));
 
+        jLabel1.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
         jLabel1.setText("Enter Question below");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 18, 169, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 169, -1));
 
+        Alabel.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
         Alabel.setText("Enter Option A");
         add(Alabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 164, -1, -1));
 
+        Blabel.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
         Blabel.setText("Enter Option B");
-        add(Blabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 201, 113, -1));
+        add(Blabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 201, 130, -1));
 
+        Clabel.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
         Clabel.setText("Enter Option C");
-        add(Clabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 233, 110, -1));
+        add(Clabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 233, 130, -1));
 
+        Dlabel.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
         Dlabel.setText("Enter Option D");
-        add(Dlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 265, 110, -1));
+        add(Dlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 265, 130, -1));
 
+        difficultyLabel.setFont(Clabel.getFont());
         difficultyLabel.setText("difficulty");
         add(difficultyLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 330, -1, -1));
 
+        imageFileLabel.setFont(Clabel.getFont());
         imageFileLabel.setText("Image File");
         add(imageFileLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 360, -1, -1));
 
+        chooseFile.setFont(Clabel.getFont());
         chooseFile.setText("chooseFile");
         chooseFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chooseFileActionPerformed(evt);
             }
         });
-        add(chooseFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 355, -1, -1));
+        add(chooseFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, -1, -1));
 
+        saveButton.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
         saveButton.setText("save");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveButtonActionPerformed(evt);
             }
         });
-        add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(572, 355, -1, -1));
-        add(questionNumLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 6, 146, -1));
+        add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(559, 354, 90, 30));
 
         buttonGroup2.add(B);
+        B.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
         B.setText("B");
         add(B, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 193, -1, -1));
 
         buttonGroup2.add(A);
+        A.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
         A.setText("A");
         A.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,10 +231,12 @@ public class MCPanel extends javax.swing.JPanel {
         add(A, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 164, -1, -1));
 
         buttonGroup2.add(C);
+        C.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
         C.setText("C");
         add(C, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 229, -1, -1));
 
         buttonGroup2.add(D);
+        D.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
         D.setText("D");
         D.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,25 +245,28 @@ public class MCPanel extends javax.swing.JPanel {
         });
         add(D, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 261, -1, -1));
 
-        fileLabel.setText("jLabel2");
-        add(fileLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 360, 347, -1));
+        fileLabel.setFont(new java.awt.Font("Times", 0, 12)); // NOI18N
+        add(fileLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(227, 356, 330, 20));
 
         buttonGroup1.add(Easy);
+        Easy.setFont(Clabel.getFont());
         Easy.setText("Easy");
-        add(Easy, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 326, -1, -1));
+        add(Easy, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, -1, -1));
 
         buttonGroup1.add(Medium);
+        Medium.setFont(Clabel.getFont());
         Medium.setText("Medium");
-        add(Medium, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 326, -1, -1));
+        add(Medium, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, -1, -1));
 
         buttonGroup1.add(Hard);
+        Hard.setFont(Clabel.getFont());
         Hard.setText("Hard");
         Hard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 HardActionPerformed(evt);
             }
         });
-        add(Hard, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 326, -1, -1));
+        add(Hard, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, -1, -1));
 
         javax.swing.GroupLayout imagePanelLayout = new javax.swing.GroupLayout(imagePanel);
         imagePanel.setLayout(imagePanelLayout);
@@ -254,6 +280,9 @@ public class MCPanel extends javax.swing.JPanel {
         );
 
         add(imagePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(614, 129, -1, -1));
+
+        questionNumberLabel.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
+        add(questionNumberLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 170, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void choiceBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choiceBActionPerformed
@@ -345,7 +374,7 @@ public class MCPanel extends javax.swing.JPanel {
     private javax.swing.JPanel imagePanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel questionNumLabel;
+    private javax.swing.JLabel questionNumberLabel;
     private javax.swing.JButton saveButton;
     private javax.swing.JTextArea stemArea;
     // End of variables declaration//GEN-END:variables

@@ -6,6 +6,7 @@
 package GUI;
 
 import Main.Mainframe;
+import java.awt.Color;
 import java.io.File;
 import java.lang.reflect.Method;
 import javax.swing.JDialog;
@@ -27,6 +28,7 @@ public class SaveTestPanel extends javax.swing.JPanel {
         data=frame;
         fileChooser.setCurrentDirectory(new File("%USERPROFILE%/Desktop/"));
         load();
+        this.setBackground(new Color(204,204,255));
 
 
     }

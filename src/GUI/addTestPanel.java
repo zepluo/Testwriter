@@ -7,6 +7,7 @@ package GUI;
 
 import DataStructure.test;
 import Main.Mainframe;
+import java.awt.Color;
 import java.io.File;
 import javax.swing.JDialog;
 
@@ -23,6 +24,7 @@ public class addTestPanel extends javax.swing.JPanel {
     public addTestPanel(Mainframe frame) {
         initComponents();
         this.frame=frame;
+        this.setBackground(new Color(204,204,255));
        
     }
 

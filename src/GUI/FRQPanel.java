@@ -8,6 +8,7 @@ package GUI;
 import DataStructure.Questions;
 import Main.Mainframe;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -28,6 +29,7 @@ public class FRQPanel extends javax.swing.JPanel {
     public FRQPanel(Mainframe frame) {
         initComponents();
         this.frame = frame;
+        this.setBackground(new Color(204,204,255));
         
         load();
     }
@@ -94,14 +96,21 @@ public class FRQPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         imagePanel = new javax.swing.JPanel();
 
+        jScrollPane1.setFont(new java.awt.Font("Times", 1, 13)); // NOI18N
+
         stemArea.setColumns(20);
+        stemArea.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         stemArea.setRows(5);
         jScrollPane1.setViewportView(stemArea);
 
+        jScrollPane2.setFont(new java.awt.Font("Times", 1, 13)); // NOI18N
+
         answerArea.setColumns(20);
+        answerArea.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         answerArea.setRows(5);
         jScrollPane2.setViewportView(answerArea);
 
+        saveButton.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
         saveButton.setText("save");
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,10 +118,13 @@ public class FRQPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
         jLabel1.setText("difficulty");
 
+        jLabel2.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
         jLabel2.setText("Image File");
 
+        chooseFile.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
         chooseFile.setText("chooseFile");
         chooseFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,21 +132,31 @@ public class FRQPanel extends javax.swing.JPanel {
             }
         });
 
-        questionNumLabel.setText("jLabel3");
+        questionNumLabel.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
 
-        fileLabel.setText("jLabel3");
+        fileLabel.setFont(new java.awt.Font("Times", 0, 12)); // NOI18N
 
         buttonGroup1.add(Easy);
+        Easy.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
         Easy.setText("Easy");
 
         buttonGroup1.add(Medium);
+        Medium.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
         Medium.setText("Medium");
+        Medium.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MediumActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(Hard);
+        Hard.setFont(new java.awt.Font("Times", 1, 18)); // NOI18N
         Hard.setText("Hard");
 
+        jLabel3.setFont(questionNumLabel.getFont());
         jLabel3.setText("Stem");
 
+        jLabel4.setFont(questionNumLabel.getFont());
         jLabel4.setText("Answer");
 
         javax.swing.GroupLayout imagePanelLayout = new javax.swing.GroupLayout(imagePanel);
@@ -171,7 +193,7 @@ public class FRQPanel extends javax.swing.JPanel {
                                 .addComponent(Medium)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Hard)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(saveButton)
                         .addGap(70, 70, 70))
                     .addGroup(layout.createSequentialGroup()
@@ -192,40 +214,43 @@ public class FRQPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(saveButton)
-                .addGap(46, 46, 46))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(questionNumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(imagePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(saveButton)
+                        .addGap(46, 46, 46))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(Easy)
-                    .addComponent(Medium)
-                    .addComponent(Hard))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chooseFile)
-                    .addComponent(fileLabel))
-                .addContainerGap())
+                        .addComponent(questionNumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(57, 57, 57)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(61, 61, 61)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(Easy)
+                            .addComponent(Medium)
+                            .addComponent(Hard))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fileLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(chooseFile)))
+                        .addContainerGap())))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -285,6 +310,10 @@ public class FRQPanel extends javax.swing.JPanel {
         fileLabel.setText(frame.questionList.get(frame.numQuestion).getImageFile());
         imageLoad();
     }//GEN-LAST:event_chooseFileActionPerformed
+
+    private void MediumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MediumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MediumActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
