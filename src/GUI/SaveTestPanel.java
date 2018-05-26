@@ -78,6 +78,7 @@ public class SaveTestPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (evt.getActionCommand().equals("CancelSelection"))
         {
+            data.importTest(data.folderPath);
             ((JDialog) this.getTopLevelAncestor()).dispose();
         }
         else if (fileChooser.getSelectedFile().getAbsolutePath().equals(null))

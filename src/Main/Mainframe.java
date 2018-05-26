@@ -109,6 +109,7 @@ public class Mainframe extends javax.swing.JFrame {
         for(int i=1;i<contents.length;i++)
         {
             importTest(contents[i].getAbsolutePath());
+            
         }
         for(int i=0;i<testList.size();i++)
         {
@@ -129,7 +130,6 @@ public class Mainframe extends javax.swing.JFrame {
         testNameField.setVisible(true);
           drawList();
          
-        
         
         //filePath?
         
@@ -270,6 +270,13 @@ public class Mainframe extends javax.swing.JFrame {
             if (file.exists()) {
 
                 questionList.get(i - 1).setImageFile(file.getAbsolutePath());
+            }
+        }
+        for(int i = 0; i < testList.size(); i++)
+        {
+            if(testList.get(i).getTestName().equals(currentTest.getTestName()))
+            {
+                testList.remove(i);
             }
         }
         testList.add(currentTest);
@@ -493,7 +500,8 @@ public class Mainframe extends javax.swing.JFrame {
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
         // TODO add your handling code here:
         removeButton.setEnabled(false);
-    
+        File f = new File(folderPath+"/q"+(numQuestion+1)+".jpg");
+        f.delete();
         questionList.remove(numQuestion);
         if(numQuestion>0)
         //if(questionIndex>0)
@@ -508,6 +516,7 @@ public class Mainframe extends javax.swing.JFrame {
             QuestionPanel.removeAll();
             drawList();
         }
+        
     }//GEN-LAST:event_removeButtonActionPerformed
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
